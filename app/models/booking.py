@@ -12,3 +12,6 @@ class Booking(db.Model):
     startDate = db.Column(db.DateTime, nullable=False)
     endDate = db.Column(db.DateTime, nullable=False)
     createdAt = db.Column(DateTime(timezone=True), server_default=func.now())
+
+    booking_id = db.relationship("User", back_populates="owner_bookings")
+    car_id = db.relationship("Car", back_populates="car_booking")

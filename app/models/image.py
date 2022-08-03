@@ -10,3 +10,5 @@ class Image(db.Model):
     carId = db.Column(db.Integer, db.ForeignKey('cars.id'), nullable=False)
     url = db.Column(db.String(500), nullable=False)
     createdAt = db.Column(DateTime(timezone=True), server_default=func.now())
+
+    image_id = db.relationship("Car", back_populates="car_images")

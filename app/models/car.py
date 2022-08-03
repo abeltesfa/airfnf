@@ -17,3 +17,7 @@ class Car(db.Model):
     description = db.Column(db.String(1000), nullable=False)
     price = db.Column(db.Float, nullable=False)
     createdAt = db.Column(DateTime(timezone=True), server_default=func.now())
+
+    owner = db.relationship("User", back_populates="owner_cars")
+    car_booking = db.relationship("Booking", back_populates="car_id")
+    car_images = db.relationship("Image", back_populates="image_id")

@@ -8,8 +8,13 @@ class User(db.Model, UserMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(40), nullable=False, unique=True)
+    name = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
+
+    owner_cars = db.relationship("Car", back_populates="owner")
+    owner_bookings = db.relationship("Booking", back_populates="booking_id")
+
 
     @property
     def password(self):
