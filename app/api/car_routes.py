@@ -9,3 +9,7 @@ def get_cars():
     cars = Car.query.all()
     posts = [car.to_dict() for car in cars]
     return {'cars': posts}
+
+@car_routes.route('/new')
+def create_cars():
+    pass
