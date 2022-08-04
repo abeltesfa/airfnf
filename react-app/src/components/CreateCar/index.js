@@ -25,7 +25,7 @@ const CreateCar = () => {
         const errors = [];
 
         setValidationErrors(errors);
-    },[]);
+    },[dispatch]);
 
     const onSubmit = e => {
         e.preventDefault();
@@ -66,7 +66,7 @@ const CreateCar = () => {
             <form onSubmit={onSubmit}>
                 <div>
                     <label htmlFor="carYear">Car Year:</label>
-                    <input id="caryear" type="text" onChange={e => setCarYear(e.target.value)} value={carYear} />
+                    <input id="caryear" type="number" onChange={e => setCarYear(e.target.value)} value={carYear} />
                 </div>
                 <div>
                     <label htmlFor="make">Make:</label>
@@ -94,27 +94,27 @@ const CreateCar = () => {
                 </div>
                 <div>
                     <label htmlFor="price">Price:</label>
-                    <input id="price" type="text" onChange={e => setPrice(e.target.value)} value={price} />
+                    <input id="price" type="number" onChange={e => setPrice(e.target.value)} value={price} />
                 </div>
                 <div>
                     <label htmlFor="image1">Image1:</label>
-                    <input id="image1" type="text" onChange={e => setImage1(e.target.value)} value={image1} />
+                    <input id="image1" type="url" onChange={e => setImage1(e.target.value)} value={image1} />
                 </div>
                 <div>
                     <label htmlFor="image2">Image2:</label>
-                    <input id="image2" type="text" onChange={e => setImage2(e.target.value)} value={image2} />
+                    <input id="image2" type="url" onChange={e => setImage2(e.target.value)} value={image2} />
                 </div>
                 <div>
                     <label htmlFor="image3">Image3:</label>
-                    <input id="image3" type="text" onChange={e => setImage3(e.target.value)} value={image3} />
+                    <input id="image3" type="url" onChange={e => setImage3(e.target.value)} value={image3} />
                 </div>
                 <div>
                     <label htmlFor="image4">Image4:</label>
-                    <input id="image4" type="text" onChange={e => setImage4(e.target.value)} value={image4} />
+                    <input id="image4" type="url" onChange={e => setImage4(e.target.value)} value={image4} />
                 </div>
                 <div>
                     <label htmlFor="image5">Image5:</label>
-                    <input id="image5" type="text" onChange={e => setImage5(e.target.value)} value={image5} />
+                    <input id="image5" type="url" onChange={e => setImage5(e.target.value)} value={image5} />
                 </div>
                 <div>
                     <button>Submit</button>

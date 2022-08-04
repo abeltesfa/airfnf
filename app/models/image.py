@@ -12,3 +12,10 @@ class Image(db.Model):
     createdAt = db.Column(DateTime(timezone=True), server_default=func.now())
 
     image_id = db.relationship("Car", back_populates="car_images")
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'carId': self.carId,
+            'url': self.url
+        }

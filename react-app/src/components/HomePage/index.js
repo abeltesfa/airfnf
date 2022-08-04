@@ -16,6 +16,7 @@ const HomePage = () => {
             {Object.values(cars).map((car) => (
                 <div key={car?.id}>
                     <p>{car.carYear} {car.make} {car.model}</p>
+                    <img src={car.images[0].url} alt=""></img>
                 </div>
             ))}
         </div>

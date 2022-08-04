@@ -22,7 +22,7 @@ export const getAllCars = () => async(dispatch) => {
 }
 
 export const addCars = (carForm) => async(dispatch) => {
-    const response = await fetch('/api/cars/new', {
+    const response = await fetch('/api/cars/new/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

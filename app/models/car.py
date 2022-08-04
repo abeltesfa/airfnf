@@ -33,5 +33,6 @@ class Car(db.Model):
             'state': self.state,
             'country': self.country,
             'description': self.description,
-            'price': self.price
+            'price': self.price,
+            'images': [image.to_dict() for image in self.car_images]
         }
