@@ -11,3 +11,20 @@ def seed_cars():
     car8=Car(userId=5, make='Audi', model='R8', carYear=2018, city='Silver Springs', state='MD', country='USA', description='The 2018 Audi R8 offers sharp driving dynamics, powerful engine performance, and a quality interior.', price=280.50)
     car9=Car(userId=6, make='Mercedes-Benz', model='G-Class', carYear=2021, city='Pasadena', state='CA', country='USA', description='The Mercedes-Benz G-Class ranks near the top of the luxury large SUV class for its fusion of opulence and technology with comfort and power. It’s a great off-road vehicle too.', price=300.99)
     car10=Car(userId=6,make='Lamborghini', model='Aventador',carYear=2019, city='Los Angeles', state='CA', country='USA',description='The 2019 Lamborghini Aventador brings the hammer down on subtlety, offering over-the-top styling to match its over-the-top performance credentials.', price=420.69)
+
+    db.session.add(car1)
+    db.session.add(car2)
+    db.session.add(car3)
+    db.session.add(car4)
+    db.session.add(car5)
+    db.session.add(car6)
+    db.session.add(car7)
+    db.session.add(car8)
+    db.session.add(car9)
+    db.session.add(car10)
+
+    db.session.commit()
+
+def undo_cars():
+    db.session.execute('TRUNCATE cars RESTART IDENTITY CASCADE;')
+    db.session.commit()
