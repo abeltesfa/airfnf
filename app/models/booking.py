@@ -9,8 +9,8 @@ class Booking(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     userId = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     carId = db.Column(db.Integer, db.ForeignKey('cars.id'), nullable=False)
-    startDate = db.Column(db.DateTime, nullable=False)
-    endDate = db.Column(db.DateTime, nullable=False)
+    startDate = db.Column(db.Date(), nullable=False)
+    endDate = db.Column(db.Date(), nullable=False)
     createdAt = db.Column(DateTime(timezone=True), server_default=func.now())
 
     booking_id = db.relationship("User", back_populates="owner_bookings")
