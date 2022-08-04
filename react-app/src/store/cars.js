@@ -12,7 +12,7 @@ const actionAddPost = (post) => ({
 })
 
 export const getAllCars = () => async(dispatch) => {
-    const response = await fetch(`/api/cars`);
+    const response = await fetch(`/api/cars/`);
 
     if(response.ok){
         const cars = await response.json();
