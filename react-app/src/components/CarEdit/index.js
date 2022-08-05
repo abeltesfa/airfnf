@@ -41,6 +41,7 @@ const CarEdit = () => {
     }
 
     return (
+        specificCar ?
         <div>
             <h1>Car Edit</h1>
             <div>
@@ -114,6 +115,7 @@ const CarEdit = () => {
 
             </div>
         </div>
+        : null
     )
 
 }
