@@ -15,6 +15,12 @@ def get_cars():
     posts = [car.to_dict() for car in cars]
     return {'cars': posts}
 
+@car_routes.route('/images')
+def get_images():
+    images = Image.query.all()
+    images = [image.to_dict() for image in images]
+    return{'images': images}
+
 @car_routes.route('/new', methods=['POST'])
 def create_cars():
     form = CarForm()

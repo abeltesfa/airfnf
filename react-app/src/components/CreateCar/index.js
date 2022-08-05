@@ -23,11 +23,11 @@ const CreateCar = () => {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    useEffect(()=> {
+    useEffect(() => {
         const errors = [];
 
         setValidationErrors(errors);
-    },[dispatch]);
+    }, [dispatch]);
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -48,11 +48,13 @@ const CreateCar = () => {
             image3,
             image4,
             image5))
-        if(createdCar) {
+        if (createdCar) {
             history.push('/');
         }
+        return () => {
 
-        setHasSubmitted(false);
+            setHasSubmitted(false);
+        }
 
     }
 

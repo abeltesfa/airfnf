@@ -15,7 +15,7 @@ const CarDetails = () => {
     }, [dispatch])
 
     return (
-        specificCar ?
+        specificCar && specificCar.images ?
             <div>
                 <h1>Car Detail</h1>
                 <div>
