@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { addCars } from "../../store/cars";
-import { useHistory } from "react-router-dom"
+import { useHistory } from "react-router-dom";
 
 const CreateCar = () => {
     const [carYear, setCarYear] = useState('');

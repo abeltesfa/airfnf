@@ -65,27 +65,3 @@ def create_cars():
         db.session.commit()
         return car.to_dict()
     return {'errors':validation_errors_to_error_messages(form.errors)}, 401
-
-# @car_routes.route('/new', methods=['POST'])
-# def create_images():
-#     form = ImageForm()
-#     form['csrf_token'].data = request.cookies['csrf_token']
-#     if form.validate_on_submit():
-#         # car = Car(
-#         #     userId= current_user.id,
-#         #     make = form.data['make'],
-#         #     model = form.data['model'],
-#         #     carYear = form.data['carYear'],
-#         #     city = form.data['city'],
-#         #     state = form.data['state'],
-#         #     country = form.data['country'],
-#         #     description = form.data['description'],
-#         #     price = form.data['price'],
-#         # )
-#         image1 = Image(
-
-#         )
-#         db.session.add()
-#         db.session.commit()
-#         # return .to_dict()
-#     return {'errors':validation_errors_to_error_messages(form.errors)}, 401

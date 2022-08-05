@@ -5,10 +5,11 @@ import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
 import NavBar from './components/NavBar';
 import ProtectedRoute from './components/auth/ProtectedRoute';
-import User from './components/User';
 import { authenticate } from './store/session';
 import HomePage from './components/HomePage';
 import CreateCar from './components/CreateCar';
+import CarDetails from './components/CarDetails';
+import CarEdit from './components/CarEdit';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -38,8 +39,11 @@ function App() {
         <ProtectedRoute path='/cars/new' exact={true} >
           <CreateCar />
         </ProtectedRoute>
-        <ProtectedRoute path='/users/:userId' exact={true} >
-          <User />
+        <ProtectedRoute path='/cars/:carId' exact={true} >
+          <CarDetails />
+        </ProtectedRoute>
+        <ProtectedRoute path='/cars/:carId/edit' exact={true} >
+          <CarEdit />
         </ProtectedRoute>
         <ProtectedRoute path='/' exact={true} >
           <HomePage />
