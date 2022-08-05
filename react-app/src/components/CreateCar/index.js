@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { addCars } from "../../store/cars";
+import { useHistory } from "react-router-dom"
 
 const CreateCar = () => {
     const [carYear, setCarYear] = useState('');
@@ -19,7 +21,7 @@ const CreateCar = () => {
     const [validationErrors, setValidationErrors] = useState([]);
 
     const dispatch = useDispatch();
-    const user = useSelector(state=>state.session.user)
+    const history = useHistory();
 
     useEffect(()=> {
         const errors = [];
@@ -27,25 +29,28 @@ const CreateCar = () => {
         setValidationErrors(errors);
     },[dispatch]);
 
-    const onSubmit = e => {
+    const onSubmit = async (e) => {
         e.preventDefault();
 
         setHasSubmitted(true);
         if (validationErrors.length) return alert(`Cannot Submit`);
 
-        const carFormInformation = {
-            userId: user.id,
-            carYear,
+        const createdCar = await dispatch(addCars(carYear,
             make,
             model,
             city,
             state,
             country,
             description,
-            price
+            price,
+            image1,
+            image2,
+            image3,
+            image4,
+            image5))
+        if(createdCar) {
+            history.push('/');
         }
-
-        console.log(carFormInformation);
 
         setHasSubmitted(false);
 
