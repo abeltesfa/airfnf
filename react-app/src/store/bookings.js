@@ -27,7 +27,7 @@ const bookingsReducer = (state= {}, action) => {
     switch(action.type) {
         case LOAD_BOOKINGS:
             const newState1 = {};
-            action.bookings.bookings.forEach(booking => {
+            action.bookings.user_bookings.forEach(booking => {
                 newState1[booking.id] = booking;
             })
             return newState1;

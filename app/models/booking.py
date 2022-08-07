@@ -23,7 +23,7 @@ class Booking(db.Model):
             'carId': self.carId,
             'startDate': self.startDate,
             'endDate': self.endDate,
-            'user': [user.to_dict() for user in self.booking_id],
-            'car': [car.to_dict() for car in self.car_id]
+            # 'user': [user.to_dict() for user in self.booking_id],
+            # 'car': [car.to_dict() for car in self.car_id]
 
         }
