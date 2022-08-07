@@ -3,7 +3,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
 
-const NavBar = () => {
+const NavBar = ({sessionUser}) => {
   return (
     <nav>
       <ul>
@@ -25,6 +25,11 @@ const NavBar = () => {
         <li>
           <NavLink to='/cars/new' exact={true} activeClassName='active'>
             Create a Car
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to={`/${sessionUser.username}`} exact={true} activeClassName='active'>
+            User Profile
           </NavLink>
         </li>
         <li>

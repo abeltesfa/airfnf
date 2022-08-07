@@ -15,3 +15,15 @@ class Booking(db.Model):
 
     booking_id = db.relationship("User", back_populates="owner_bookings")
     car_id = db.relationship("Car", back_populates="car_booking")
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'userId': self.userId,
+            'carId': self.carId,
+            'startDate': self.startDate,
+            'endDate': self.endDate,
+            'user': [user.to_dict() for user in self.booking_id],
+            'car': [car.to_dict() for car in self.car_id]
+
+        }
