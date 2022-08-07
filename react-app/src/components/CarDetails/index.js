@@ -1,11 +1,12 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink, useHistory, useParams } from "react-router-dom";
 import { deleteCar, getAllCars } from "../../store/cars";
 
 
 const CarDetails = () => {
     const dispatch = useDispatch();
+    const history = useHistory();
     const pCarId = useParams();
     const cars = useSelector(state => state.cars);
     const specificCar = cars[pCarId.carId];
@@ -16,6 +17,7 @@ const CarDetails = () => {
 
     const onDelete = async() => {
         await dispatch(deleteCar(pCarId.carId))
+        history.push('/');
     }
 
     return (
