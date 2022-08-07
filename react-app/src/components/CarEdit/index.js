@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import { getAllCars } from "../../store/cars";
+import { useHistory, useParams } from "react-router-dom";
+import { editCar, getAllCars } from "../../store/cars";
 
 const CarEdit = () => {
     const dispatch = useDispatch()
@@ -29,6 +29,8 @@ const CarEdit = () => {
     const [image5, setImage5] = useState(specificCar.images[4].url);
     const [hasSubmitted, setHasSubmitted] = useState(false);
     const [validationErrors, setValidationErrors] = useState([]);
+    const carId = pCarId.carId;
+    const history = useHistory();
 
     useEffect(()=> {
         const errors = [];
@@ -36,8 +38,34 @@ const CarEdit = () => {
         setValidationErrors(errors);
     },[]);
 
+
+
     const onSubmit = async (e) => {
         e.preventDefault();
+
+        const editedCar = await dispatch(editCar(
+            carId,
+            carYear,
+            make,
+            model,
+            city,
+            state,
+            country,
+            description,
+            price,
+            image1,
+            image2,
+            image3,
+            image4,
+            image5))
+
+        if (editedCar) {
+            history.push(`/cars/${carId}`);
+        }
+        return () => {
+
+            setHasSubmitted(false);
+        }
     }
 
     return (

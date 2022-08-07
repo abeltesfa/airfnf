@@ -71,3 +71,35 @@ def create_cars():
         db.session.commit()
         return car.to_dict()
     return {'errors':validation_errors_to_error_messages(form.errors)}, 401
+
+@car_routes.route('/<int:carId>/edit', methods=['PUT'])
+def edit_cars(carId):
+    form = CarForm()
+    edited_car = Car.query.get(carId)
+    print('!!!!!!!!!!!!!!!!!!', dir(edited_car.car_images[0]))
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        edited_car.make = form.data['make'],
+        edited_car.model = form.data['model'],
+        edited_car.carYear = form.data['carYear'],
+        edited_car.city = form.data['city'],
+        edited_car.state = form.data['state'],
+        edited_car.country = form.data['country'],
+        edited_car.description = form.data['description'],
+        edited_car.price = form.data['price']
+        edited_car.car_images[0].url = form.data['image1']
+        edited_car.car_images[1].url = form.data['image2']
+        edited_car.car_images[2].url = form.data['image3']
+        edited_car.car_images[3].url = form.data['image4']
+        edited_car.car_images[4].url = form.data['image5']
+
+        db.session.commit()
+        return edited_car.to_dict()
+    return {'errors':validation_errors_to_error_messages(form.errors)}, 401
+
+@car_routes.route('/<int:carId>/delete', methods=['DELETE'])
+def delete_car(carId):
+    deleted_car = Car.query.get(carId)
+    db.session.delete(deleted_car)
+    db.session.commit()
+    return f'{carId}'

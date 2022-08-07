@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { getAllCars } from "../../store/cars";
-import { getAllImages } from "../../store/images";
+// import { getAllImages } from "../../store/images";
 
 const HomePage = () => {
     const dispatch = useDispatch();

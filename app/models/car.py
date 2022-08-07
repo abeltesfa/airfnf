@@ -20,7 +20,7 @@ class Car(db.Model):
 
     owner = db.relationship("User", back_populates="owner_cars")
     car_booking = db.relationship("Booking", back_populates="car_id")
-    car_images = db.relationship("Image", back_populates="image_id")
+    car_images = db.relationship("Image", back_populates="image_id",cascade="all, delete")
 
     def to_dict(self):
         return {
