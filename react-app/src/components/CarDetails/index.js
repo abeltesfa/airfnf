@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHistory, useParams } from "react-router-dom";
-import { addBookings, getCarBookings } from "../../store/bookings";
+import { addBookings, deleteBooking, getCarBookings } from "../../store/bookings";
 import { deleteCar, getAllCars } from "../../store/cars";
+import BookingEdit from "../BookingEdit";
 
 
-const CarDetails = ({sessionUser}) => {
+const CarDetails = ({ sessionUser }) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const pCarId = useParams();
@@ -17,6 +18,7 @@ const CarDetails = ({sessionUser}) => {
 
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
+    const [editBookingForm, setEditBookingForm] = useState(false);
     const [hasSubmitted, setHasSubmitted] = useState(false);
     const [validationErrors, setValidationErrors] = useState([]);
 
@@ -36,6 +38,10 @@ const CarDetails = ({sessionUser}) => {
         history.push('/');
     }
 
+    const bookingOnDelete = async (bookingId) => {
+        await dispatch(deleteBooking(bookingId))
+    }
+
     const onSubmit = async (e) => {
         e.preventDefault();
 
@@ -48,6 +54,12 @@ const CarDetails = ({sessionUser}) => {
 
             setHasSubmitted(false);
         }
+    }
+
+    const showForm = () => {
+        if (!editBookingForm) {
+            setEditBookingForm(true)
+        } else setEditBookingForm(false)
     }
 
     return (
@@ -78,6 +90,11 @@ const CarDetails = ({sessionUser}) => {
                             <div key={booking?.id}>
                                 <p>Start Date: {booking.startDate} </p>
                                 <p>End Date: {booking.endDate}</p>
+                                <button onClick={showForm}>Edit Booking</button>
+                                {/* <button onClick={bookingOnDelete()}>Delete Booking</button> */}
+                                {editBookingForm &&
+                                    <BookingEdit booking={booking} userId={userId} carId={carId} />
+                                }
                             </div>
                         ))}
                     </div>

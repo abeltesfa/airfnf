@@ -85,12 +85,12 @@ def edit_cars(carId):
         edited_car.state = form.data['state'],
         edited_car.country = form.data['country'],
         edited_car.description = form.data['description'],
-        edited_car.price = form.data['price']
-        edited_car.car_images[0].url = form.data['image1']
-        edited_car.car_images[1].url = form.data['image2']
-        edited_car.car_images[2].url = form.data['image3']
-        edited_car.car_images[3].url = form.data['image4']
-        edited_car.car_images[4].url = form.data['image5']
+        edited_car.price = form.data['price'],
+        edited_car.car_images[0].url = form.data['image1'],
+        edited_car.car_images[1].url = form.data['image2'],
+        edited_car.car_images[2].url = form.data['image3'],
+        edited_car.car_images[3].url = form.data['image4'],
+        edited_car.car_images[4].url = form.data['image5'],
 
         db.session.commit()
         return edited_car.to_dict()

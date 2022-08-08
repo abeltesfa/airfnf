@@ -35,3 +35,23 @@ def add_bookings():
         db.session.commit()
         return booking.to_dict()
     return {'errors':validation_errors_to_error_messages(form.errors)}, 401
+
+@booking_routes.route('/<int:bookingId>/edit', methods=['PUT'])
+def edit_bookings(bookingId):
+    form = BookingForm()
+    edited_booking = Booking.query.get(bookingId)
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        edited_booking.startDate = form.data['startDate'],
+        edited_booking.endDate = form.data['endDate']
+
+        db.session.commit()
+        return edited_booking.to_dict()
+    return {'errors':validation_errors_to_error_messages(form.errors)}, 401
+
+@booking_routes.route('/<int:bookingId>/delete', methods=['DELETE'])
+def delete_booking(bookingId):
+    deleted_booking = Booking.query.get(bookingId)
+    db.session.delete(deleted_booking)
+    db.session.commit()
+    return f'{bookingId}'
