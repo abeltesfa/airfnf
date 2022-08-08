@@ -19,7 +19,7 @@ class Car(db.Model):
     createdAt = db.Column(DateTime(timezone=True), server_default=func.now())
 
     owner = db.relationship("User", back_populates="owner_cars")
-    car_booking = db.relationship("Booking", back_populates="car_id")
+    car_booking = db.relationship("Booking", back_populates="car_id",cascade="all, delete")
     car_images = db.relationship("Image", back_populates="image_id",cascade="all, delete")
 
     def to_dict(self):

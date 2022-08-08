@@ -11,3 +11,9 @@ def get_bookings_user(userId):
     user_bookings = Booking.query.filter(Booking.userId == userId).all()
     bookings = [booking.to_dict() for booking in user_bookings]
     return {'user_bookings': bookings}
+
+@booking_routes.route('/cars/<int:carId>')
+def get_bookings_car(carId):
+    user_bookings = Booking.query.filter(Booking.carId == carId).all()
+    bookings = [booking.to_dict() for booking in user_bookings]
+    return {'user_bookings': bookings}

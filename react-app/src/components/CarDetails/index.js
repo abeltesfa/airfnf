@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHistory, useParams } from "react-router-dom";
+import { getCarBookings } from "../../store/bookings";
 import { deleteCar, getAllCars } from "../../store/cars";
 
 
@@ -9,13 +10,15 @@ const CarDetails = () => {
     const history = useHistory();
     const pCarId = useParams();
     const cars = useSelector(state => state.cars);
+    const bookings = useSelector(state => state.bookings)
     const specificCar = cars[pCarId.carId];
 
     useEffect(() => {
         dispatch(getAllCars())
-    }, [dispatch])
+        dispatch(getCarBookings(pCarId.carId))
+    }, [dispatch, pCarId])
 
-    const onDelete = async() => {
+    const onDelete = async () => {
         await dispatch(deleteCar(pCarId.carId))
         history.push('/');
     }
@@ -41,6 +44,17 @@ const CarDetails = () => {
                 <NavLink to={`/cars/${specificCar.id}/edit`}>
                     Car Edit
                 </NavLink>
+                <div>
+                    <h3>Current Bookings</h3>
+                    <div>
+                        {Object.values(bookings).map((booking) => (
+                            <div key={booking?.id}>
+                                <p>Start Date: {booking.startDate} </p>
+                                <p>End Date: {booking.endDate}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
             </div>
             : null
     )
