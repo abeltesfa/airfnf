@@ -76,7 +76,6 @@ def create_cars():
 def edit_cars(carId):
     form = CarForm()
     edited_car = Car.query.get(carId)
-    print('!!!!!!!!!!!!!!!!!!', dir(edited_car.car_images[0]))
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         edited_car.make = form.data['make'],

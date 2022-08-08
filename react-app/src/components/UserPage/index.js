@@ -26,6 +26,7 @@ const UserPage = ({ sessionUser }) => {
                     {Object.values(bookings).map((booking) => (
                         <div key={booking?.id}>
                             <NavLink to={`/cars/${booking.carId}`}>
+                            <p>{cars[booking.carId]?.carYear} {cars[booking.carId]?.make} {cars[booking.carId]?.model}</p>
                             <img src={cars[booking.carId]?.images[0]?.url} alt=""></img>
                             </NavLink>
                             <p>Start Date: {booking.startDate} </p>

@@ -42,7 +42,7 @@ function App() {
           <CreateCar />
         </ProtectedRoute>
         <ProtectedRoute path='/cars/:carId' exact={true} >
-          <CarDetails />
+          <CarDetails sessionUser={sessionUser}/>
         </ProtectedRoute>
         <ProtectedRoute path='/cars/:carId/edit' exact={true} >
           <CarEdit />

@@ -2,6 +2,8 @@ from flask import Blueprint, request
 from flask_wtf.csrf import validate_csrf
 from app.api.auth_routes import validation_errors_to_error_messages
 from flask_login import current_user
+
+from app.forms.booking_form import BookingForm
 from ..models import db, Booking
 
 booking_routes = Blueprint('bookings', __name__)
@@ -17,3 +19,19 @@ def get_bookings_car(carId):
     user_bookings = Booking.query.filter(Booking.carId == carId).all()
     bookings = [booking.to_dict() for booking in user_bookings]
     return {'user_bookings': bookings}
+
+@booking_routes.route('/new', methods=['POST'])
+def add_bookings():
+    form = BookingForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        booking = Booking(
+            userId = form.data['userId'],
+            carId = form.data['carId'],
+            startDate = form.data['startDate'],
+            endDate = form.data['endDate']
+        )
+        db.session.add(booking)
+        db.session.commit()
+        return booking.to_dict()
+    return {'errors':validation_errors_to_error_messages(form.errors)}, 401

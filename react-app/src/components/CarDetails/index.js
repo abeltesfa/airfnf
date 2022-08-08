@@ -1,26 +1,53 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHistory, useParams } from "react-router-dom";
-import { getCarBookings } from "../../store/bookings";
+import { addBookings, getCarBookings } from "../../store/bookings";
 import { deleteCar, getAllCars } from "../../store/cars";
 
 
-const CarDetails = () => {
+const CarDetails = ({sessionUser}) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const pCarId = useParams();
     const cars = useSelector(state => state.cars);
-    const bookings = useSelector(state => state.bookings)
+    const bookings = useSelector(state => state.bookings);
     const specificCar = cars[pCarId.carId];
+    const userId = sessionUser.id;
+    const carId = pCarId.carId;
+
+    const [startDate, setStartDate] = useState('');
+    const [endDate, setEndDate] = useState('');
+    const [hasSubmitted, setHasSubmitted] = useState(false);
+    const [validationErrors, setValidationErrors] = useState([]);
 
     useEffect(() => {
         dispatch(getAllCars())
         dispatch(getCarBookings(pCarId.carId))
     }, [dispatch, pCarId])
 
+    useEffect(() => {
+        const errors = [];
+
+        setValidationErrors(errors);
+    }, [dispatch]);
+
     const onDelete = async () => {
         await dispatch(deleteCar(pCarId.carId))
         history.push('/');
+    }
+
+    const onSubmit = async (e) => {
+        e.preventDefault();
+
+        setHasSubmitted(true);
+        if (validationErrors.length) return alert(`Cannot Submit`);
+
+        const createdBooking = await dispatch(addBookings(userId, carId, startDate, endDate))
+
+        return () => {
+
+            setHasSubmitted(false);
+        }
     }
 
     return (
@@ -54,6 +81,32 @@ const CarDetails = () => {
                             </div>
                         ))}
                     </div>
+                </div>
+                <div>
+                    <h2>Create Booking</h2>
+                    {hasSubmitted && validationErrors.length > 0 && (
+                        <div>
+                            The following errors were found:
+                            <ul>
+                                {validationErrors.map(error => (
+                                    <li key={error}>{error}</li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
+                    <form onSubmit={onSubmit}>
+                        <div>
+                            <label htmlFor="startDate">Start Date:</label>
+                            <input id="startDate" type="date" onChange={e => setStartDate(e.target.value)} value={startDate} />
+                        </div>
+                        <div>
+                            <label htmlFor="endDate">End Date:</label>
+                            <input id="endDate" type="date" onChange={e => setEndDate(e.target.value)} value={endDate} />
+                        </div>
+                        <div>
+                            <button>Submit</button>
+                        </div>
+                    </form>
                 </div>
             </div>
             : null
