@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHistory, useParams } from "react-router-dom";
-import { addBookings, deleteBooking, getCarBookings } from "../../store/bookings";
+import { addBookings, getCarBookings } from "../../store/bookings";
 import { deleteCar, getAllCars } from "../../store/cars";
-import BookingEdit from "../BookingEdit";
+import BookingDetails from "../BookingDetails";
+
 
 
 const CarDetails = ({ sessionUser }) => {
@@ -18,7 +19,7 @@ const CarDetails = ({ sessionUser }) => {
 
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
-    const [editBookingForm, setEditBookingForm] = useState(false);
+    // const [editBookingForm, setEditBookingForm] = useState(false);
     const [hasSubmitted, setHasSubmitted] = useState(false);
     const [validationErrors, setValidationErrors] = useState([]);
 
@@ -38,9 +39,9 @@ const CarDetails = ({ sessionUser }) => {
         history.push('/');
     }
 
-    const bookingOnDelete = async (bookingId) => {
-        await dispatch(deleteBooking(bookingId))
-    }
+    // const bookingOnDelete = async (bookingId) => {
+    //     await dispatch(deleteBooking(bookingId))
+    // }
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -48,7 +49,7 @@ const CarDetails = ({ sessionUser }) => {
         setHasSubmitted(true);
         if (validationErrors.length) return alert(`Cannot Submit`);
 
-        const createdBooking = await dispatch(addBookings(userId, carId, startDate, endDate))
+        await dispatch(addBookings(userId, carId, startDate, endDate))
 
         return () => {
 
@@ -56,11 +57,11 @@ const CarDetails = ({ sessionUser }) => {
         }
     }
 
-    const showForm = () => {
-        if (!editBookingForm) {
-            setEditBookingForm(true)
-        } else setEditBookingForm(false)
-    }
+    // const showForm = () => {
+    //     if (!editBookingForm) {
+    //         setEditBookingForm(true)
+    //     } else setEditBookingForm(false)
+    // }
 
     return (
         specificCar && specificCar.images ?
@@ -88,13 +89,7 @@ const CarDetails = ({ sessionUser }) => {
                     <div>
                         {Object.values(bookings).map((booking) => (
                             <div key={booking?.id}>
-                                <p>Start Date: {booking.startDate} </p>
-                                <p>End Date: {booking.endDate}</p>
-                                <button onClick={showForm}>Edit Booking</button>
-                                {/* <button onClick={bookingOnDelete()}>Delete Booking</button> */}
-                                {editBookingForm &&
-                                    <BookingEdit booking={booking} userId={userId} carId={carId} />
-                                }
+                                <BookingDetails booking={booking} userId={userId} carId={carId} />
                             </div>
                         ))}
                     </div>

@@ -3,15 +3,17 @@ import { useDispatch } from "react-redux";
 import { editBookings } from "../../store/bookings";
 
 
-const BookingEdit = ({userId, carId, booking}) => {
+const BookingEdit = ({userId, carId, booking, hideForm}) => {
     const dispatch = useDispatch();
     const bookingId = booking.id
-    // const [startDate, setStartDate] = useState(booking?.startDate);
-    // const [endDate, setEndDate] = useState(booking?.endDate);
-    const [startDate, setStartDate] = useState('');
-    const [endDate, setEndDate] = useState('');
+    const [startDate, setStartDate] = useState(booking?.startDate);
+    const [endDate, setEndDate] = useState(booking?.endDate);
+    // const [startDate, setStartDate] = useState('');
+    // const [endDate, setEndDate] = useState('');
     const [hasSubmitted, setHasSubmitted] = useState(false);
     const [validationErrors, setValidationErrors] = useState([]);
+
+    console.log(booking?.startDate)
 
     useEffect(() => {
         const errors = [];
@@ -26,6 +28,10 @@ const BookingEdit = ({userId, carId, booking}) => {
         if (validationErrors.length) return alert(`Cannot Submit`);
 
         const editedBooking = await dispatch(editBookings(bookingId, userId, carId, startDate, endDate))
+
+        if (editedBooking){
+            hideForm();
+        }
         return () => {
 
             setHasSubmitted(false);
@@ -56,6 +62,7 @@ const BookingEdit = ({userId, carId, booking}) => {
                 </div>
                 <div>
                     <button>Submit</button>
+                    <button type='button' onClick={hideForm}>Cancel</button>
                 </div>
             </form>
         </div>
