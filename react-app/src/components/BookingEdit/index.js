@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux";
 import { editBookings } from "../../store/bookings";
+import { formatInTimeZone } from 'date-fns-tz';
 
 
 const BookingEdit = ({userId, carId, booking, hideForm}) => {
     const dispatch = useDispatch();
-    const bookingId = booking.id
-    const [startDate, setStartDate] = useState(booking?.startDate);
-    const [endDate, setEndDate] = useState(booking?.endDate);
-    // const [startDate, setStartDate] = useState('');
-    // const [endDate, setEndDate] = useState('');
+    const bookingId = booking.id;
+    const convertedStartDate = formatInTimeZone(new Date(booking?.startDate), 'UTC', 'yyyy-MM-dd');
+    const convertedEndDate = formatInTimeZone(new Date(booking?.endDate), 'UTC', 'yyyy-MM-dd');
+    const [startDate, setStartDate] = useState(convertedStartDate);
+    const [endDate, setEndDate] = useState(convertedEndDate);
     const [hasSubmitted, setHasSubmitted] = useState(false);
     const [validationErrors, setValidationErrors] = useState([]);
 
-    console.log(booking?.startDate)
 
     useEffect(() => {
         const errors = [];
