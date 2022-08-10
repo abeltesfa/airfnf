@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { editCar, getAllCars } from "../../store/cars";
+import ErrorModal from "../ErrorModal";
 
 const CarEdit = () => {
     const dispatch = useDispatch()
@@ -27,21 +28,95 @@ const CarEdit = () => {
     const [image3, setImage3] = useState(specificCar.images[2].url);
     const [image4, setImage4] = useState(specificCar.images[3].url);
     const [image5, setImage5] = useState(specificCar.images[4].url);
-    const [hasSubmitted, setHasSubmitted] = useState(false);
+    // const [hasSubmitted, setHasSubmitted] = useState(false);
+    const [showModal, setShowModal] = useState(false);
     const [validationErrors, setValidationErrors] = useState([]);
     const carId = pCarId.carId;
     const history = useHistory();
 
     useEffect(() => {
         const errors = [];
+        if (!carYear) {
+            errors.push('Please select a car year.');
+        }
+        if (!make) {
+            errors.push('Please select a make.')
+        }
+        if (model.length <= 0) {
+            errors.push('Please enter a model name.');
+        }
+        if (model.length > 40) {
+            errors.push('Model name cannot be more than 40 characters.');
+        }
+        if (city.length <= 0) {
+            errors.push('Please enter a city.');
+        }
+        if (city.length > 85) {
+            errors.push('City name cannot be more than 85 characters.');
+        }
+        if (state.length <= 0) {
+            errors.push('Please enter a state. Enter N/A if not applicable.');
+        }
+        if (state.length > 20) {
+            errors.push('State name cannot be longer than 20 characters.');
+        }
+        if (country.length <= 0) {
+            errors.push('Please enter a country.');
+        }
+        if (country.length > 57) {
+            errors.push('Country name cannot be more than 57 characters.');
+        }
+        if (description.length <= 0) {
+            errors.push('Please enter a description');
+        }
+        if (description.length > 1000) {
+            errors.push('Description cannot be more than 1000 characters.');
+        }
+        if (price <= 0) {
+            errors.push('Price cannot be zero or a negative number')
+        }
+        if (!image1) {
+            errors.push('Please enter a value for image1')
+        }
+        if (!image2) {
+            errors.push('Please enter a value for image2')
+        }
+        if (!image3) {
+            errors.push('Please enter a value for image3')
+        }
+        if (!image4) {
+            errors.push('Please enter a value for image4')
+        }
+        if (!image5) {
+            errors.push('Please enter a value for image5')
+        }
+        if (!image1.endsWith('.jpg') && !image1.endsWith('.jpeg') && !image1.endsWith('.png')) {
+            errors.push('Image1 must end in .jpg, .jpeg, or .png')
+        }
+        if (!image2.endsWith('.jpg') && !image2.endsWith('.jpeg') && !image2.endsWith('.png')) {
+            errors.push('Image2 must end in .jpg, .jpeg, or .png')
+        }
+        if (!image3.endsWith('.jpg') && !image3.endsWith('.jpeg') && !image3.endsWith('.png')) {
+            errors.push('Image3 must end in .jpg, .jpeg, or .png')
+        }
+        if (!image4.endsWith('.jpg') && !image4.endsWith('.jpeg') && !image4.endsWith('.png')) {
+            errors.push('Image4 must end in .jpg, .jpeg, or .png')
+        }
+        if (!image5.endsWith('.jpg') && !image5.endsWith('.jpeg') && !image5.endsWith('.png')) {
+            errors.push('Image5 must end in .jpg, .jpeg, or .png')
+        }
 
         setValidationErrors(errors);
-    }, []);
+    }, [carYear, make, model, city, state, country, description, price, image1, image2, image3, image4, image5]);
 
 
 
     const onSubmit = async (e) => {
         e.preventDefault();
+
+        if(validationErrors.length){
+            setShowModal(true)
+        }else {
 
         const editedCar = await dispatch(editCar(
             carId,
@@ -61,10 +136,10 @@ const CarEdit = () => {
 
         if (editedCar) {
             history.push(`/cars/${carId}`);
-        }
+        }}
         return () => {
 
-            setHasSubmitted(false);
+            // setHasSubmitted(false);
         }
     }
 
@@ -73,7 +148,8 @@ const CarEdit = () => {
             <div>
                 <h1>Car Edit</h1>
                 <div>
-                    {hasSubmitted && validationErrors.length > 0 && (
+                    <ErrorModal hideModal={() => setShowModal(false)} showModal={showModal} validationErrors={validationErrors} />
+                    {/* {hasSubmitted && validationErrors.length > 0 && (
                         <div>
                             The following errors were found:
                             <ul>
@@ -82,7 +158,7 @@ const CarEdit = () => {
                                 ))}
                             </ul>
                         </div>
-                    )}
+                    )} */}
                     <form onSubmit={onSubmit}>
                         <div>
                             <label htmlFor="carYear">Car Year:</label>

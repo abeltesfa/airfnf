@@ -2,19 +2,26 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
+import ErrorModal from '../ErrorModal';
 
 const LoginForm = () => {
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showModal, setShowModal] = useState(false);
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
   const onLogin = async (e) => {
     e.preventDefault();
+    const errorsArray = [];
     const data = await dispatch(login(email, password));
     if (data) {
-      setErrors(data);
+      errorsArray.push(...data);
+    }
+    if (errorsArray.length) {
+      setErrors(errorsArray)
+      return setShowModal(true);
     }
   };
 
@@ -32,11 +39,12 @@ const LoginForm = () => {
 
   return (
     <form onSubmit={onLogin}>
-      <div>
+      {/* <div>
         {errors.map((error, ind) => (
           <div key={ind}>{error}</div>
         ))}
-      </div>
+      </div> */}
+      <ErrorModal hideModal={() => setShowModal(false)} showModal={showModal} validationErrors={errors} />
       <div>
         <label htmlFor='email'>Email</label>
         <input
