@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Redirect } from 'react-router-dom';
 import { signUp } from '../../store/session';
+import ErrorModal from '../ErrorModal';
 
 const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
@@ -9,15 +10,21 @@ const SignUpForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
+  const [showModal, setShowModal] = useState(false);
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
   const onSignUp = async (e) => {
     e.preventDefault();
+    const errorsArray = [];
     if (password === repeatPassword) {
       const data = await dispatch(signUp(username, email, password));
       if (data) {
-        setErrors(data)
+        errorsArray.push(...data);
+      }
+      if (errorsArray.length) {
+        setErrors(errorsArray)
+        return setShowModal(true);
       }
     }
   };
@@ -44,11 +51,12 @@ const SignUpForm = () => {
 
   return (
     <form onSubmit={onSignUp}>
-      <div>
+      {/* <div>
         {errors.map((error, ind) => (
           <div key={ind}>{error}</div>
         ))}
-      </div>
+      </div> */}
+      <ErrorModal hideModal={() => setShowModal(false)} showModal={showModal} validationErrors={errors} />
       <div>
         <label>User Name</label>
         <input

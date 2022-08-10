@@ -17,13 +17,11 @@ const BookingEdit = ({userId, carId, booking, hideForm}) => {
 
     useEffect(() => {
         const errors = [];
-
         setValidationErrors(errors);
     }, []);
 
     const onSubmit = async (e) => {
         e.preventDefault();
-
         setHasSubmitted(true);
         if (validationErrors.length) return alert(`Cannot Submit`);
 
@@ -33,7 +31,6 @@ const BookingEdit = ({userId, carId, booking, hideForm}) => {
             hideForm();
         }
         return () => {
-
             setHasSubmitted(false);
         }
     }

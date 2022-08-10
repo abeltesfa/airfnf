@@ -16,8 +16,6 @@ function BookingDetails({ booking, userId, carId }) {
     const convertedStartDate = formatInTimeZone(new Date(booking?.startDate), 'UTC', 'EEEE MMMM do yyyy');
     const convertedEndDate = formatInTimeZone(new Date(booking?.endDate), 'UTC', 'EEEE MMMM do yyyy');
 
-
-
     return (
         <div>
             {!showEditBooking ?
