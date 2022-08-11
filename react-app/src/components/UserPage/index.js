@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import { getUserBookings } from "../../store/bookings";
 import { getAllCars } from "../../store/cars";
 import { formatInTimeZone } from 'date-fns-tz';
+import './UserPage.css'
 
 
 const UserPage = ({ sessionUser }) => {
@@ -16,25 +17,28 @@ const UserPage = ({ sessionUser }) => {
         dispatch(getAllCars())
     }, [dispatch, sessionUser])
 
-
+    console.log(sessionUser)
     return (
         bookings ?
             <div className="page-outer">
-                <div>
-                    <h1>User Profile Page</h1>
+                <div className="page-margin-add"></div>
+                <div className="page-info">
                     <div>
-                        <h3>My Bookings</h3>
+                        <h1>{sessionUser?.name}'s Profile Page</h1>
                         <div>
-                            {Object.values(bookings).map((booking) => (
-                                <div key={booking?.id}>
-                                    <NavLink to={`/cars/${booking.carId}`}>
-                                        <p>{cars[booking.carId]?.carYear} {cars[booking.carId]?.make} {cars[booking.carId]?.model}</p>
-                                        <img src={cars[booking.carId]?.images[0]?.url} alt=""></img>
-                                    </NavLink>
-                                    <p>Start Date: {formatInTimeZone(new Date(booking?.startDate), 'UTC', 'EEEE MMMM do yyyy')} </p>
-                                    <p>End Date: {formatInTimeZone(new Date(booking?.endDate), 'UTC', 'EEEE MMMM do yyyy')}</p>
-                                </div>
-                            ))}
+                            <h3>My Bookings</h3>
+                            <div>
+                                {Object.values(bookings).map((booking) => (
+                                    <div className="userprofile-booking-container" key={booking?.id}>
+                                        <NavLink to={`/cars/${booking.carId}`}>
+                                            <p>{cars[booking.carId]?.carYear} {cars[booking.carId]?.make} {cars[booking.carId]?.model}</p>
+                                            <img className="userprofile-img" src={cars[booking.carId]?.images[0]?.url} alt=""></img>
+                                        </NavLink>
+                                        <p>Start Date: {formatInTimeZone(new Date(booking?.startDate), 'UTC', 'EEEE MMMM do yyyy')} </p>
+                                        <p>End Date: {formatInTimeZone(new Date(booking?.endDate), 'UTC', 'EEEE MMMM do yyyy')}</p>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -11,6 +11,7 @@ import CreateCar from './components/CreateCar';
 import CarDetails from './components/CarDetails';
 import CarEdit from './components/CarEdit';
 import UserPage from './components/UserPage';
+import About from './components/About';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -32,11 +33,8 @@ function App() {
     <BrowserRouter>
       <NavBar sessionUser={sessionUser}/>
       <Switch>
-        <Route path='/login' exact={true}>
-          <LoginForm />
-        </Route>
-        <Route path='/sign-up' exact={true}>
-          <SignUpForm />
+        <Route path='/about' exact={true}>
+          <About />
         </Route>
         <ProtectedRoute path='/cars/new' exact={true} >
           <CreateCar />
