@@ -148,7 +148,7 @@ const CreateCar = () => {
                 <ErrorModal hideModal={() => setShowModal(false)} showModal={showModal} validationErrors={validationErrors} />
                 <form onSubmit={onSubmit}>
                     <div>
-                        <label htmlFor="carYear">Car Year:</label>
+                        <label htmlFor="carYear">Car Year:*</label>
                         <select id="caryear" onChange={e => setCarYear(e.target.value)} value={carYear}>
                             <option value="" disabled>Select a Year...</option>
                             <option value={2000}>2000</option>
@@ -177,7 +177,7 @@ const CreateCar = () => {
                         </select>
                     </div>
                     <div>
-                        <label htmlFor="make">Make:</label>
+                        <label htmlFor="make">Make:*</label>
                         <select id="make" onChange={e => setMake(e.target.value)} value={make}>
                             <option value="" disabled>Select a Make...</option>
                             <option value={'Acura'}>Acura</option>
@@ -234,49 +234,50 @@ const CreateCar = () => {
                         </select>
                     </div>
                     <div>
-                        <label htmlFor="model">Model:</label>
+                        <label htmlFor="model">Model:*</label>
                         <input id="model" type="text" onChange={e => setModel(e.target.value)} value={model} />
                     </div>
                     <div>
-                        <label htmlFor="city">City:</label>
+                        <label htmlFor="city">City:*</label>
                         <input id="city" type="text" onChange={e => setCity(e.target.value)} value={city} />
                     </div>
                     <div>
-                        <label htmlFor="state">State:</label>
+                        <label htmlFor="state">State:*</label>
                         <input id="state" type="text" onChange={e => setState(e.target.value)} value={state} />
                     </div>
                     <div>
-                        <label htmlFor="country">Country:</label>
+                        <label htmlFor="country">Country:*</label>
                         <input id="country" type="text" onChange={e => setCountry(e.target.value)} value={country} />
                     </div>
                     <div>
-                        <label htmlFor="description">Description:</label>
+                        <label htmlFor="description">Description:*</label>
                         <textarea id="description" onChange={e => setDescription(e.target.value)} value={description}></textarea>
                     </div>
                     <div>
-                        <label htmlFor="price">Price:</label>
+                        <label htmlFor="price">Price:*</label>
                         <input id="price" type="number" onChange={e => setPrice(e.target.value)} value={price} />
                     </div>
                     <div>
-                        <label htmlFor="image1">Image1:</label>
+                        <label htmlFor="image1">Image1:*</label>
                         <input id="image1" type="url" onChange={e => setImage1(e.target.value)} value={image1} />
                     </div>
                     <div>
-                        <label htmlFor="image2">Image2:</label>
+                        <label htmlFor="image2">Image2:*</label>
                         <input id="image2" type="url" onChange={e => setImage2(e.target.value)} value={image2} />
                     </div>
                     <div>
-                        <label htmlFor="image3">Image3:</label>
+                        <label htmlFor="image3">Image3:*</label>
                         <input id="image3" type="url" onChange={e => setImage3(e.target.value)} value={image3} />
                     </div>
                     <div>
-                        <label htmlFor="image4">Image4:</label>
+                        <label htmlFor="image4">Image4:*</label>
                         <input id="image4" type="url" onChange={e => setImage4(e.target.value)} value={image4} />
                     </div>
                     <div>
-                        <label htmlFor="image5">Image5:</label>
+                        <label htmlFor="image5">Image5:*</label>
                         <input id="image5" type="url" onChange={e => setImage5(e.target.value)} value={image5} />
                     </div>
+                    <span>*: This field is required</span>
                     <div>
                         <button>Submit</button>
                     </div>
