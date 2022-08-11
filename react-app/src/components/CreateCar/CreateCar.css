@@ -1,0 +1,43 @@
+.car-create-form-container{
+    display:flex;
+    flex-direction: column;
+    background-color: #fff;
+    width:50%;
+    height:500px;
+    margin:auto;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+    border: solid 1px #D8D8D8;
+    border-radius: 2px;
+}
+
+.car-create-form-container div{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.car-create-form-container label {
+    font-size: 16px;
+    color: #262626;
+    font-weight: 500;
+    display:inline-block;
+    padding-right: 25px;
+    width:110px;
+    text-align: right;
+}
+
+.car-create-form-container input {
+    border-radius: 2px;
+    border: solid 1px #D8D8D8;
+}
+
+.car-create-form-container textarea {
+    border-radius: 2px;
+    border: solid 1px #D8D8D8;
+}
+
+.car-create-form-container select {
+    border-radius: 2px;
+    border: solid 1px #D8D8D8;
+}

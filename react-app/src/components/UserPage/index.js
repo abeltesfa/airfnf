@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { getUserBookings } from "../../store/bookings";
 import { getAllCars } from "../../store/cars";
+import { formatInTimeZone } from 'date-fns-tz';
 
 
 const UserPage = ({ sessionUser }) => {
@@ -30,8 +31,8 @@ const UserPage = ({ sessionUser }) => {
                                         <p>{cars[booking.carId]?.carYear} {cars[booking.carId]?.make} {cars[booking.carId]?.model}</p>
                                         <img src={cars[booking.carId]?.images[0]?.url} alt=""></img>
                                     </NavLink>
-                                    <p>Start Date: {booking.startDate} </p>
-                                    <p>End Date: {booking.endDate}</p>
+                                    <p>Start Date: {formatInTimeZone(new Date(booking?.startDate), 'UTC', 'EEEE MMMM do yyyy')} </p>
+                                    <p>End Date: {formatInTimeZone(new Date(booking?.endDate), 'UTC', 'EEEE MMMM do yyyy')}</p>
                                 </div>
                             ))}
                         </div>

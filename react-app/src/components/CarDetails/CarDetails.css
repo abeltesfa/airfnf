@@ -57,6 +57,7 @@
 
 .details-create-booking-container input {
     border-radius: 3px;
+    border: solid 1px #D8D8D8;
 }
 
 .details-bookings-edit-btn{

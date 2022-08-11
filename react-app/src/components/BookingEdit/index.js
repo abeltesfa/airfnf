@@ -58,8 +58,8 @@ const BookingEdit = ({ carId, booking, hideForm, sessionUser}) => {
                     <input id="endDate" type="date" onChange={e => setEndDate(e.target.value)} value={endDate} />
                 </div>
                 <div>
-                    <button>Submit</button>
-                    <button type='button' onClick={hideForm}>Cancel</button>
+                    <button className="details-bookings-edit-btn">Submit</button>
+                    <button type='button' className="details-bookings-edit-btn" onClick={hideForm}>Cancel</button>
                 </div>
             </form>
         </div>
