@@ -28,6 +28,10 @@ const UserPage = ({ sessionUser }) => {
                         <div>
                             <h3>My Bookings</h3>
                             <div>
+                                {Object.keys(bookings).length ?
+                                    null
+                                    : <h4>No Current Bookings listed...</h4>
+                                }
                                 {Object.values(bookings).map((booking) => (
                                     <div className="userprofile-booking-container" key={booking?.id}>
                                         <NavLink to={`/cars/${booking.carId}`}>

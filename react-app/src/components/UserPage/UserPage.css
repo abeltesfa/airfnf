@@ -1,6 +1,6 @@
 .userprofile-img{
     height: 200px;
-    width: 200px;
+    width: 300px;
 }
 
 .userprofile-booking-container a{
@@ -10,5 +10,12 @@
 }
 
 .userprofile-booking-container{
-
+    border-radius: 2px;
+    border: solid 1px #D8D8D8;
+    margin: auto;
+}
+.userprofile-booking-container *{
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
 }
