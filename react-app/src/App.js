@@ -19,7 +19,7 @@ function App() {
   const sessionUser = useSelector(state => state.session.user);
 
   useEffect(() => {
-    (async() => {
+    (async () => {
       await dispatch(authenticate());
       setLoaded(true);
     })();
@@ -31,7 +31,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <NavBar sessionUser={sessionUser}/>
+      <NavBar sessionUser={sessionUser} />
       <Switch>
         <Route path='/about' exact={true}>
           <About />
@@ -40,7 +40,7 @@ function App() {
           <CreateCar />
         </ProtectedRoute>
         <Route path='/cars/:carId' exact={true} >
-          <CarDetails sessionUser={sessionUser}/>
+          <CarDetails sessionUser={sessionUser} />
         </Route>
         <ProtectedRoute path='/cars/:carId/edit' exact={true} >
           <CarEdit />
@@ -50,6 +50,9 @@ function App() {
         </ProtectedRoute>
         <Route path='/' exact={true} >
           <HomePage sessionUser={sessionUser} />
+        </Route>
+        <Route>
+          Page loading... or page not found
         </Route>
       </Switch>
     </BrowserRouter>
