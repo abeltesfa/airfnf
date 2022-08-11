@@ -142,22 +142,9 @@ const CarDetails = ({ sessionUser }) => {
                         </div>
                     )}
 
-                    <div>
-                        <h3>Current Bookings</h3>
-                        {Object.keys(bookings).length ?
-                            null
-                            : <h4>No Current Bookings listed...</h4>
-                        }
-                        <div>
-                            {Object.values(bookings).map((booking) => (
-                                <div key={booking?.id}>
-                                    <BookingDetails booking={booking} carId={carId} sessionUser={sessionUser} />
-                                </div>
-                            ))}
-                        </div>
-                    </div>
+
                     {sessionUser ?
-                        <div>
+                        <div className="details-create-booking-container">
                             <h2>Create Booking</h2>
                             {/* {hasSubmitted && validationErrors.length > 0 && (
                         <div>
@@ -186,6 +173,20 @@ const CarDetails = ({ sessionUser }) => {
                         </div>
                         : null
                     }
+                    <div>
+                        <h3>Current Bookings</h3>
+                        {Object.keys(bookings).length ?
+                            null
+                            : <h4>No Current Bookings listed...</h4>
+                        }
+                        <div>
+                            {Object.values(bookings).map((booking) => (
+                                <div key={booking?.id}>
+                                    <BookingDetails booking={booking} carId={carId} sessionUser={sessionUser} />
+                                </div>
+                            ))}
+                        </div>
+                    </div>
                 </div>
             </div>
             : null

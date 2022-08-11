@@ -29,3 +29,43 @@
     color: #FF385C;
     font-weight: bolder;
 }
+
+.details-create-booking-container{
+    border: 3px #f8f8f8 solid;
+    margin-right: 700px;
+    border-radius: 11px;
+}
+
+.details-create-booking-container label {
+    margin-left: 250px;
+}
+
+.details-create-booking-container h2 {
+    margin-left: 250px;
+}
+
+.details-create-booking-container button {
+    margin-top: 11px;
+    margin-left: 300px;
+    border: 0;
+    background-color: #FF385C;
+    color: white;
+    border-radius: 7px;
+    padding: 7px;
+    cursor: pointer;
+}
+
+.details-create-booking-container input {
+    border-radius: 3px;
+}
+
+.details-bookings-edit-btn{
+    border: 0;
+    background-color: #FF385C;
+    color: white;
+    border-radius: 7px;
+    padding: 7px;
+    cursor: pointer;
+    margin-left: 3px;
+    margin-right: 3px;
+}
