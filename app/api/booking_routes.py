@@ -26,7 +26,7 @@ def add_bookings():
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         booking = Booking(
-            userId = form.data['userId'],
+            userId = current_user.id,
             carId = form.data['carId'],
             startDate = form.data['startDate'],
             endDate = form.data['endDate']

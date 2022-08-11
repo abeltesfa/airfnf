@@ -41,18 +41,18 @@ function App() {
         <ProtectedRoute path='/cars/new' exact={true} >
           <CreateCar />
         </ProtectedRoute>
-        <ProtectedRoute path='/cars/:carId' exact={true} >
+        <Route path='/cars/:carId' exact={true} >
           <CarDetails sessionUser={sessionUser}/>
-        </ProtectedRoute>
+        </Route>
         <ProtectedRoute path='/cars/:carId/edit' exact={true} >
           <CarEdit />
         </ProtectedRoute>
         <ProtectedRoute path='/:username' exact={true} >
           <UserPage sessionUser={sessionUser} />
         </ProtectedRoute>
-        <ProtectedRoute path='/' exact={true} >
-          <HomePage />
-        </ProtectedRoute>
+        <Route path='/' exact={true} >
+          <HomePage sessionUser={sessionUser} />
+        </Route>
       </Switch>
     </BrowserRouter>
   );
