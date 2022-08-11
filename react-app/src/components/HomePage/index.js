@@ -20,7 +20,7 @@ const HomePage = () => {
                 <div key={car?.id}>
                     <NavLink to={`/cars/${car.id}`}>
                     <p>{car.carYear} {car.make} {car.model}</p>
-                    <img src={car.images[0]?.url} alt=""></img>
+                    <img src={car.images[0]?.url} onError={(e)=>{e.target.onError=null; e.target.src='https://cdn-icons-png.flaticon.com/512/2137/2137884.png'}} alt=""></img>
                     </NavLink>
                 </div>
             ))}
