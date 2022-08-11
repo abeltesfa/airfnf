@@ -4,7 +4,7 @@ import { editBookings } from "../../store/bookings";
 import { formatInTimeZone } from 'date-fns-tz';
 
 
-const BookingEdit = ({ carId, booking, hideForm}) => {
+const BookingEdit = ({ carId, booking, hideForm, sessionUser}) => {
     const dispatch = useDispatch();
     const bookingId = booking.id;
     const convertedStartDate = formatInTimeZone(new Date(booking?.startDate), 'UTC', 'yyyy-MM-dd');

@@ -1,0 +1,31 @@
+.details-img-container{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.details-img{
+    height: 300px;
+    width: 300px;
+    border-radius: 33px;
+}
+
+.details-container{
+    margin-left: 33px;
+}
+
+.details-delete-car-btn{
+    border: 0;
+    background-color: transparent;
+    color: #FF385C;
+    font-weight: bolder;
+    cursor: pointer;
+    margin-top: 7px;
+    font-size: 16px;
+    margin-left: -5px;
+}
+
+.details-edit-car-btn{
+    text-decoration: none;
+    color: #FF385C;
+    font-weight: bolder;
+}

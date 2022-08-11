@@ -6,6 +6,7 @@ import { deleteCar, getAllCars } from "../../store/cars";
 import BookingDetails from "../BookingDetails";
 import ErrorModal from "../ErrorModal";
 import { addHours, addDays } from 'date-fns';
+import './CarDetails.css'
 // import { formatInTimeZone } from 'date-fns-tz';
 
 const CarDetails = ({ sessionUser }) => {
@@ -24,10 +25,10 @@ const CarDetails = ({ sessionUser }) => {
     // const [editBookingForm, setEditBookingForm] = useState(false);
     // const [hasSubmitted, setHasSubmitted] = useState(false);
     const [validationErrors, setValidationErrors] = useState([]);
-    const timezoneOffset = new Date().getTimezoneOffset()/60;
+    const timezoneOffset = new Date().getTimezoneOffset() / 60;
     const convertedToday = addHours(new Date(), timezoneOffset);
     const currBookingsArr = [];
-    const currentBookings = Object.values(bookings).map(booking=> currBookingsArr.push([addHours(new Date(booking.startDate), timezoneOffset) , addHours(new Date(booking.endDate), timezoneOffset)]))
+    const currentBookings = Object.values(bookings).map(booking => currBookingsArr.push([addHours(new Date(booking.startDate), timezoneOffset), addHours(new Date(booking.endDate), timezoneOffset)]))
     console.log(currBookingsArr)
 
 
@@ -56,15 +57,15 @@ const CarDetails = ({ sessionUser }) => {
 
     useEffect(() => {
         const errors = [];
-        if(new Date(startDate) < convertedToday){
+        if (new Date(startDate) < convertedToday) {
             errors.push('Start date cannot be in the past.')
         }
-        if(new Date(endDate) < new Date(startDate)){
+        if (new Date(endDate) < new Date(startDate)) {
             errors.push('End date must be after the start date')
         }
-        if(currBookingsArr){
-            for (let i = 0; i < currBookingsArr.length; i++){
-                if((new Date(currBookingsArr[i][0]) <= new Date(startDate)) && (new Date(currBookingsArr[i][1]) >= new Date(startDate))){
+        if (currBookingsArr) {
+            for (let i = 0; i < currBookingsArr.length; i++) {
+                if ((new Date(currBookingsArr[i][0]) <= new Date(startDate)) && (new Date(currBookingsArr[i][1]) >= new Date(startDate))) {
                     errors.push('Start Date is within already existing booking');
                 } else if ((new Date(currBookingsArr[i][0]) <= new Date(endDate)) && (new Date(currBookingsArr[i][1]) >= new Date(endDate))) {
                     errors.push('End Date is within already existing booking');
@@ -89,11 +90,11 @@ const CarDetails = ({ sessionUser }) => {
         e.preventDefault();
 
         // setHasSubmitted(true);
-        if (validationErrors.length){
+        if (validationErrors.length) {
             setShowModal(true)
-        } else{
+        } else {
             const createdBooking = await dispatch(addBookings(carId, startDate, endDate))
-            if(createdBooking) {
+            if (createdBooking) {
                 setStartDate('');
                 setEndDate('');
             }
@@ -112,40 +113,53 @@ const CarDetails = ({ sessionUser }) => {
     //     } else setEditBookingForm(false)
     // }
 
+    console.log(Object.keys(bookings).length)
     return (
         specificCar && specificCar.images ?
-            <div>
-                <h1>Car Detail</h1>
-                <div>
-                    <button onClick={onDelete}>Delete Car</button>
-                </div>
-                <div>
-                    {specificCar.images.map(pic => (
-                        <div key={pic.id}>
-                            <img src={pic.url} onError={(e)=>{e.target.onError=null; e.target.src='https://cdn-icons-png.flaticon.com/512/2137/2137884.png'}} alt=''></img>
-                        </div>
-                    ))}
-                </div>
-                <p>{specificCar.carYear} {specificCar.make} {specificCar.model}</p>
-                <p>{specificCar.description}</p>
-                <p>Location: {specificCar.city} {specificCar.state} {specificCar.country}</p>
-                <p>Price: ${specificCar.price}</p>
-                <NavLink to={`/cars/${specificCar.id}/edit`}>
-                    Car Edit
-                </NavLink>
-                <div>
-                    <h3>Current Bookings</h3>
-                    <div>
-                        {Object.values(bookings).map((booking) => (
-                            <div key={booking?.id}>
-                                <BookingDetails booking={booking} carId={carId} />
+            <div className="page-outer">
+                <div className="details-container">
+                    <h1>Car Details</h1>
+
+                    <div className="details-img-container">
+                        {specificCar.images.map(pic => (
+                            <div key={pic.id}>
+                                <img className="details-img" src={pic.url} onError={(e) => { e.target.onError = null; e.target.src = 'https://cdn-icons-png.flaticon.com/512/2137/2137884.png' }} alt=''></img>
                             </div>
                         ))}
                     </div>
-                </div>
-                <div>
-                    <h2>Create Booking</h2>
-                    {/* {hasSubmitted && validationErrors.length > 0 && (
+                    <p>{specificCar.carYear} {specificCar.make} {specificCar.model}</p>
+                    <p>{specificCar.description}</p>
+                    <p>Location: {specificCar.city} {specificCar.state} {specificCar.country}</p>
+                    <p>Price: ${specificCar.price}</p>
+                    {specificCar?.userId === sessionUser?.id && (
+                        <div>
+                            <NavLink to={`/cars/${specificCar.id}/edit`} className="details-edit-car-btn">
+                                Car Edit
+                            </NavLink>
+                            <div>
+                                <button className="details-delete-car-btn" onClick={onDelete}>Delete Car</button>
+                            </div>
+                        </div>
+                    )}
+
+                    <div>
+                        <h3>Current Bookings</h3>
+                        {Object.keys(bookings).length ?
+                            null
+                            : <h4>No Current Bookings listed...</h4>
+                        }
+                        <div>
+                            {Object.values(bookings).map((booking) => (
+                                <div key={booking?.id}>
+                                    <BookingDetails booking={booking} carId={carId} sessionUser={sessionUser} />
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                    {sessionUser ?
+                        <div>
+                            <h2>Create Booking</h2>
+                            {/* {hasSubmitted && validationErrors.length > 0 && (
                         <div>
                             The following errors were found:
                             <ul>
@@ -155,20 +169,23 @@ const CarDetails = ({ sessionUser }) => {
                             </ul>
                         </div>
                     )} */}
-                    <ErrorModal hideModal={() => setShowModal(false)} showModal={showModal} validationErrors={validationErrors} />
-                    <form onSubmit={onSubmit}>
-                        <div>
-                            <label htmlFor="startDate">Start Date:</label>
-                            <input id="startDate" type="date" onChange={e => setStartDate(e.target.value)} value={startDate} />
+                            <ErrorModal hideModal={() => setShowModal(false)} showModal={showModal} validationErrors={validationErrors} />
+                            <form onSubmit={onSubmit}>
+                                <div>
+                                    <label htmlFor="startDate">Start Date:</label>
+                                    <input id="startDate" type="date" onChange={e => setStartDate(e.target.value)} value={startDate} />
+                                </div>
+                                <div>
+                                    <label htmlFor="endDate">End Date:</label>
+                                    <input id="endDate" type="date" onChange={e => setEndDate(e.target.value)} value={endDate} />
+                                </div>
+                                <div>
+                                    <button>Submit</button>
+                                </div>
+                            </form>
                         </div>
-                        <div>
-                            <label htmlFor="endDate">End Date:</label>
-                            <input id="endDate" type="date" onChange={e => setEndDate(e.target.value)} value={endDate} />
-                        </div>
-                        <div>
-                            <button>Submit</button>
-                        </div>
-                    </form>
+                        : null
+                    }
                 </div>
             </div>
             : null
