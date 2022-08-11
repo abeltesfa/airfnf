@@ -18,25 +18,27 @@ const UserPage = ({ sessionUser }) => {
 
     return (
         bookings ?
-        <div>
-            <h1>User Profile Page</h1>
-            <div>
-                <h3>My Bookings</h3>
+            <div className="page-outer">
                 <div>
-                    {Object.values(bookings).map((booking) => (
-                        <div key={booking?.id}>
-                            <NavLink to={`/cars/${booking.carId}`}>
-                            <p>{cars[booking.carId]?.carYear} {cars[booking.carId]?.make} {cars[booking.carId]?.model}</p>
-                            <img src={cars[booking.carId]?.images[0]?.url} alt=""></img>
-                            </NavLink>
-                            <p>Start Date: {booking.startDate} </p>
-                            <p>End Date: {booking.endDate}</p>
+                    <h1>User Profile Page</h1>
+                    <div>
+                        <h3>My Bookings</h3>
+                        <div>
+                            {Object.values(bookings).map((booking) => (
+                                <div key={booking?.id}>
+                                    <NavLink to={`/cars/${booking.carId}`}>
+                                        <p>{cars[booking.carId]?.carYear} {cars[booking.carId]?.make} {cars[booking.carId]?.model}</p>
+                                        <img src={cars[booking.carId]?.images[0]?.url} alt=""></img>
+                                    </NavLink>
+                                    <p>Start Date: {booking.startDate} </p>
+                                    <p>End Date: {booking.endDate}</p>
+                                </div>
+                            ))}
                         </div>
-                    ))}
+                    </div>
                 </div>
             </div>
-        </div>
-        : null
+            : null
     )
 }
 
