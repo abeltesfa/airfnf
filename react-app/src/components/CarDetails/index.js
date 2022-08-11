@@ -5,6 +5,7 @@ import { addBookings, getCarBookings } from "../../store/bookings";
 import { deleteCar, getAllCars } from "../../store/cars";
 import BookingDetails from "../BookingDetails";
 import ErrorModal from "../ErrorModal";
+import { addHours, addDays } from 'date-fns';
 // import { formatInTimeZone } from 'date-fns-tz';
 
 const CarDetails = ({ sessionUser }) => {
@@ -23,10 +24,30 @@ const CarDetails = ({ sessionUser }) => {
     // const [editBookingForm, setEditBookingForm] = useState(false);
     // const [hasSubmitted, setHasSubmitted] = useState(false);
     const [validationErrors, setValidationErrors] = useState([]);
+    const timezoneOffset = new Date().getTimezoneOffset()/60;
+    const convertedToday = addHours(new Date(), timezoneOffset);
+    const currBookingsArr = [];
+    const currentBookings = Object.values(bookings).map(booking=> currBookingsArr.push([addHours(new Date(booking.startDate), timezoneOffset) , addHours(new Date(booking.endDate), timezoneOffset)]))
+    console.log(currBookingsArr)
 
-    // const convertedToday = formatInTimeZone(new Date(), 'UTC', 'yyyy-MM-dd');
-    // const today = new Date();
-    // console.log(convertedToday)
+
+    // const dateRangeArr = [];
+    // const dateRange = (start, end) => {
+    //     dateRangeArr.push(start);
+    //     while (start <= end){
+    //         dateRangeArr.push(addDays(start, 1))
+    //     }
+    //     console.log(dateRangeArr)
+    // };
+    // if(currBookingsArr){
+    //     dateRange(addHours(new Date(), timezoneOffset), addHours(addDays(new Date(), 10), timezoneOffset))
+    //     console.log(addHours(new Date(currBookingsArr[0][0]), timezoneOffset), addHours(new Date(currBookingsArr[0][1]), timezoneOffset))
+    // }
+    // if(currBookingsArr){
+
+    //     dateRange(new Date(currBookingsArr[0][0]), new Date(currBookingsArr[0][1]))
+    // }
+
 
     useEffect(() => {
         dispatch(getAllCars())
@@ -35,9 +56,25 @@ const CarDetails = ({ sessionUser }) => {
 
     useEffect(() => {
         const errors = [];
+        if(new Date(startDate) < convertedToday){
+            errors.push('Start date cannot be in the past.')
+        }
+        if(new Date(endDate) < new Date(startDate)){
+            errors.push('End date must be after the start date')
+        }
+        if(currBookingsArr){
+            for (let i = 0; i < currBookingsArr.length; i++){
+                if((new Date(currBookingsArr[i][0]) <= new Date(startDate)) && (new Date(currBookingsArr[i][1]) >= new Date(startDate))){
+                    errors.push('Start Date is within already existing booking');
+                } else if ((new Date(currBookingsArr[i][0]) <= new Date(endDate)) && (new Date(currBookingsArr[i][1]) >= new Date(endDate))) {
+                    errors.push('End Date is within already existing booking');
+                }
+            }
+        }
+
 
         setValidationErrors(errors);
-    }, [dispatch]);
+    }, [startDate, endDate]);
 
     const onDelete = async () => {
         await dispatch(deleteCar(pCarId.carId))
@@ -85,7 +122,7 @@ const CarDetails = ({ sessionUser }) => {
                 <div>
                     {specificCar.images.map(pic => (
                         <div key={pic.id}>
-                            <img src={pic.url} alt=''></img>
+                            <img src={pic.url} onError={(e)=>{e.target.onError=null; e.target.src='https://cdn-icons-png.flaticon.com/512/2137/2137884.png'}} alt=''></img>
                         </div>
                     ))}
                 </div>
