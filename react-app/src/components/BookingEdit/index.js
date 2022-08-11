@@ -4,7 +4,7 @@ import { editBookings } from "../../store/bookings";
 import { formatInTimeZone } from 'date-fns-tz';
 
 
-const BookingEdit = ({userId, carId, booking, hideForm}) => {
+const BookingEdit = ({ carId, booking, hideForm}) => {
     const dispatch = useDispatch();
     const bookingId = booking.id;
     const convertedStartDate = formatInTimeZone(new Date(booking?.startDate), 'UTC', 'yyyy-MM-dd');
@@ -25,7 +25,7 @@ const BookingEdit = ({userId, carId, booking, hideForm}) => {
         setHasSubmitted(true);
         if (validationErrors.length) return alert(`Cannot Submit`);
 
-        const editedBooking = await dispatch(editBookings(bookingId, userId, carId, startDate, endDate))
+        const editedBooking = await dispatch(editBookings(bookingId, carId, startDate, endDate))
 
         if (editedBooking){
             hideForm();

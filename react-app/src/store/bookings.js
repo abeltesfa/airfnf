@@ -35,14 +35,14 @@ export const getCarBookings = (carId) => async(dispatch) => {
     }
 }
 
-export const addBookings = (userId, carId, startDate, endDate) => async(dispatch) => {
+export const addBookings = ( carId, startDate, endDate) => async(dispatch) => {
     const response = await fetch('/api/bookings/new', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            userId,
+
             carId,
             startDate,
             endDate
@@ -55,14 +55,14 @@ export const addBookings = (userId, carId, startDate, endDate) => async(dispatch
     }
 }
 
-export const editBookings = (bookingId, userId, carId, startDate, endDate) => async(dispatch) => {
+export const editBookings = (bookingId, carId, startDate, endDate) => async(dispatch) => {
     const response = await fetch(`/api/bookings/${bookingId}/edit`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            userId,
+
             carId,
             startDate,
             endDate

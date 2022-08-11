@@ -5,7 +5,7 @@ import BookingEdit from "../BookingEdit";
 import { formatInTimeZone } from 'date-fns-tz';
 
 
-function BookingDetails({ booking, userId, carId }) {
+function BookingDetails({ booking, carId }) {
     const dispatch = useDispatch();
     const [showEditBooking, setShowEditBooking] = useState(false);
 
@@ -25,7 +25,7 @@ function BookingDetails({ booking, userId, carId }) {
                     <button onClick={() => setShowEditBooking(true)}>Edit Booking</button>
                     <button onClick={()=> bookingOnDelete(booking.id)}>Delete Booking</button>
                 </div>
-                : <BookingEdit booking={booking} userId={userId} carId={carId} hideForm={()=> setShowEditBooking(false)}/>
+                : <BookingEdit booking={booking} carId={carId} hideForm={()=> setShowEditBooking(false)}/>
             }
         </div>
     )

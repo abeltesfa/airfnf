@@ -15,7 +15,7 @@ const CarDetails = ({ sessionUser }) => {
     const cars = useSelector(state => state.cars);
     const bookings = useSelector(state => state.bookings);
     const specificCar = cars[pCarId.carId];
-    const userId = sessionUser.id;
+    // const userId = sessionUser.id;
     const carId = pCarId.carId;
 
     const [startDate, setStartDate] = useState('');
@@ -92,7 +92,7 @@ const CarDetails = ({ sessionUser }) => {
         if (validationErrors.length){
             setShowModal(true)
         } else{
-            const createdBooking = await dispatch(addBookings(userId, carId, startDate, endDate))
+            const createdBooking = await dispatch(addBookings(carId, startDate, endDate))
             if(createdBooking) {
                 setStartDate('');
                 setEndDate('');
@@ -138,7 +138,7 @@ const CarDetails = ({ sessionUser }) => {
                     <div>
                         {Object.values(bookings).map((booking) => (
                             <div key={booking?.id}>
-                                <BookingDetails booking={booking} userId={userId} carId={carId} />
+                                <BookingDetails booking={booking} carId={carId} />
                             </div>
                         ))}
                     </div>

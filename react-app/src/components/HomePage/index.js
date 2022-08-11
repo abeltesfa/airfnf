@@ -1,26 +1,55 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { getAllCars } from "../../store/cars";
+import LoginForm from "../auth/LoginForm";
+import SignUpForm from "../auth/SignUpForm";
+import './HomePage.css'
 // import { getAllImages } from "../../store/images";
 
-const HomePage = () => {
+const HomePage = ({ sessionUser }) => {
     const dispatch = useDispatch();
-    const cars = useSelector(state => state.cars)
+    const [showLogIn, setShowLogIn] = useState(true)
+    const cars = useSelector(state => state.cars);
+
 
     useEffect(() => {
         dispatch(getAllCars());
     }, [dispatch])
 
+
+
+
     return (
         cars ?
             <div className="page-outer">
-                <div>
-                    <h1>Home Page</h1>
+                {!sessionUser && (
+                    <div className="home-splash-container">
+                        <div className="home-splash-left">
+                            <h2>Welcome to airfnf</h2>
+                            <p>Here at airFastnFurious you can book cars or add cars to be booked.
+                                In order to book cars or add cars please sign up or log in.
+                            </p>
+                        </div>
+                        <div className="home-splash-right">
+                            {showLogIn ?
+                                <div>
+                                    <LoginForm />
+                                    <p>Dont have an account? <button className="navbar-logout" onClick={()=>setShowLogIn(false)}>Sign up</button></p>
+                                </div>
+                                :
+                                <div>
+                                    <SignUpForm />
+                                    <p>Have an account? <button className="navbar-logout" onClick={()=>setShowLogIn(true)}>Log In</button></p>
+                                </div>}
+                        </div>
+                    </div>
+                )}
+                <div className="home-cars-container">
                     {Object.values(cars).map((car) => (
-                        <div key={car?.id}>
+                        <div className="home-single-car" key={car?.id}>
                             <NavLink to={`/cars/${car.id}`}>
-                                <img src={car.images[0]?.url} onError={(e) => { e.target.onError = null; e.target.src = 'https://cdn-icons-png.flaticon.com/512/2137/2137884.png' }} alt=""></img>
+                                <img className="home-car-img" src={car.images[0]?.url} onError={(e) => { e.target.onError = null; e.target.src = 'https://cdn-icons-png.flaticon.com/512/2137/2137884.png' }} alt=""></img>
                                 <p>{car.carYear} {car.make} {car.model}</p>
                             </NavLink>
                         </div>
