@@ -1,14 +1,15 @@
-
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
+import airfnflogo from '../images/airbnb-logo.png'
+import "./NavBar.css"
 
 const NavBar = ({ sessionUser }) => {
   return (
     <div className='navbar-container'>
       <div className='navbar-left'>
         <NavLink to='/' exact={true} activeClassName='active'>
-          Home
+          <img className='navbar-logo' src={airfnflogo}></img>
         </NavLink>
       </div>
       <div className='navbar-center'></div>

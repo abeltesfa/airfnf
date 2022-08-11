@@ -1,0 +1,44 @@
+.navbar-container{
+    position:fixed;
+    top: 0px;
+    left:0px;
+    right:0px;
+    height:80px;
+    width: 100%;
+    display:flex;
+    background-color: #f8f8f8;
+
+}
+
+.navbar-left{
+    margin-left: 33px;
+}
+
+.navbar-center{
+    width: 50%;
+}
+
+.navbar-right{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-right a {
+    margin-left: 10px;
+    margin-right: 10px;
+    text-decoration: none;
+    color: #FF385C;
+}
+
+.navbar-logout{
+    border: 0;
+    background-color: transparent;
+    color: #FF385C;
+    cursor: pointer;
+}
+
+.navbar-logo{
+    height:64px;
+    margin-top: 7px;
+}
