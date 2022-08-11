@@ -1,6 +1,23 @@
 /* TODO Add site wide styles */
 .page-outer{
     margin-top: 90px;
+    width: 100%;
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    z-index: -1;
+    min-height: 100vh;
+}
+
+.page-margin-add {
+    width: 100%;
+}
+
+.page-info {
+    max-width: 975px;
+    margin: auto;
+    padding: 20px;
 }
 
 body {

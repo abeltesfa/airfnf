@@ -19,7 +19,7 @@ function BookingDetails({ booking, carId, sessionUser }) {
     return (
         <div>
             {!showEditBooking ?
-                <div>
+                <div className="details-singlebookinfo">
                     <p>Start Date: {convertedStartDate} </p>
                     <p>End Date: {convertedEndDate}</p>
                     {sessionUser?.id === booking?.userId && (

@@ -23,6 +23,9 @@ const NavBar = ({ sessionUser }) => {
       </div>
       <div className='navbar-center'></div>
       <nav className='navbar-right'>
+        <NavLink to='/about' exact={true} activeClassName='active'>
+          About
+        </NavLink>
         {!sessionUser ?
           <>
             <button className="navbar-logout" onClick={demoLogin}>Demo Log In</button>
