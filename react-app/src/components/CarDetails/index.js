@@ -29,7 +29,7 @@ const CarDetails = ({ sessionUser }) => {
     const convertedToday = addHours(new Date(), timezoneOffset);
     const currBookingsArr = [];
     const currentBookings = Object.values(bookings).map(booking => currBookingsArr.push([addHours(new Date(booking.startDate), timezoneOffset), addHours(new Date(booking.endDate), timezoneOffset)]))
-    console.log(currBookingsArr)
+
 
 
     // const dateRangeArr = [];
@@ -65,10 +65,19 @@ const CarDetails = ({ sessionUser }) => {
         }
         if (currBookingsArr) {
             for (let i = 0; i < currBookingsArr.length; i++) {
-                if ((new Date(currBookingsArr[i][0]) <= new Date(startDate)) && (new Date(currBookingsArr[i][1]) >= new Date(startDate))) {
+                if (new Date(startDate) < new Date(currBookingsArr[i][0]) && new Date(endDate) > new Date(currBookingsArr[i][1])) {
+                    errors.push('Booking includes existing booking')
+                    setValidationErrors(errors);
+                    return
+                }
+                else if ((new Date(currBookingsArr[i][0]) <= new Date(startDate)) && (new Date(currBookingsArr[i][1]) >= new Date(startDate))) {
                     errors.push('Start Date is within already existing booking');
+                    setValidationErrors(errors);
+                    return
                 } else if ((new Date(currBookingsArr[i][0]) <= new Date(endDate)) && (new Date(currBookingsArr[i][1]) >= new Date(endDate))) {
                     errors.push('End Date is within already existing booking');
+                    setValidationErrors(errors);
+                    return
                 }
             }
         }

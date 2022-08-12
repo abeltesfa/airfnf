@@ -32,6 +32,9 @@ const BookingEdit = ({ carId, booking, hideForm, sessionUser}) => {
         }
         if (currBookingsArr) {
             for (let i = 0; i < currBookingsArr.length; i++) {
+                if( ((new Date(currBookingsArr[i][0]) <= new Date(startDate)) && (new Date(currBookingsArr[i][1]) >= new Date(startDate))) && ((new Date(currBookingsArr[i][0]) <= new Date(endDate)) && (new Date(currBookingsArr[i][1]) >= new Date(endDate)))){
+                    errors.push('Booking within existing booking')
+                }
                 if ((new Date(currBookingsArr[i][0]) <= new Date(startDate)) && (new Date(currBookingsArr[i][1]) >= new Date(startDate))) {
                     errors.push('Start Date is within already existing booking');
                 } else if ((new Date(currBookingsArr[i][0]) <= new Date(endDate)) && (new Date(currBookingsArr[i][1]) >= new Date(endDate))) {
