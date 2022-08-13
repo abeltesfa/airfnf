@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { editBookings, getCarBookings } from "../../store/bookings";
-import { addHours, addDays } from 'date-fns';
+import { addHours, format } from 'date-fns';
 import { formatInTimeZone } from 'date-fns-tz';
 import ErrorModal from "../ErrorModal";
 
@@ -11,7 +11,7 @@ const BookingEdit = ({ carId, booking, hideForm, sessionUser}) => {
     const bookingId = booking.id;
     const bookings = useSelector(state => state.bookings);
     const timezoneOffset = new Date().getTimezoneOffset() / 60;
-    const convertedToday = addHours(new Date(), timezoneOffset);
+    const timezoneToday = addHours(new Date(), timezoneOffset);
     const convertedStartDate = formatInTimeZone(new Date(booking?.startDate), 'UTC', 'yyyy-MM-dd');
     const convertedEndDate = formatInTimeZone(new Date(booking?.endDate), 'UTC', 'yyyy-MM-dd');
     const [startDate, setStartDate] = useState(convertedStartDate);
@@ -19,8 +19,10 @@ const BookingEdit = ({ carId, booking, hideForm, sessionUser}) => {
     // const [hasSubmitted, setHasSubmitted] = useState(false);
     const [showModal, setShowModal] = useState(false);
     const [validationErrors, setValidationErrors] = useState([]);
+    const formatToday = format(timezoneToday, 'yyyy-MM-dd');
+    const convertedToday = new Date(formatToday);
     const currBookingsArr = [];
-    Object.values(bookings).map(booking => currBookingsArr.push([addHours(new Date(booking.startDate), timezoneOffset), addHours(new Date(booking.endDate), timezoneOffset)]))
+    Object.values(bookings).map(booking => currBookingsArr.push([addHours(new Date(booking.startDate), timezoneOffset), addHours(new Date(booking.endDate), timezoneOffset), booking.id]))
 
     useEffect(() => {
         const errors = [];
@@ -32,13 +34,19 @@ const BookingEdit = ({ carId, booking, hideForm, sessionUser}) => {
         }
         if (currBookingsArr) {
             for (let i = 0; i < currBookingsArr.length; i++) {
-                if( ((new Date(currBookingsArr[i][0]) <= new Date(startDate)) && (new Date(currBookingsArr[i][1]) >= new Date(startDate))) && ((new Date(currBookingsArr[i][0]) <= new Date(endDate)) && (new Date(currBookingsArr[i][1]) >= new Date(endDate)))){
-                    errors.push('Booking within existing booking')
+                if (new Date(startDate) < new Date(currBookingsArr[i][0]) && new Date(endDate) > new Date(currBookingsArr[i][1]) && currBookingsArr[i][2] !== bookingId) {
+                    errors.push('Booking includes existing booking')
+                    setValidationErrors(errors);
+                    return
                 }
-                if ((new Date(currBookingsArr[i][0]) <= new Date(startDate)) && (new Date(currBookingsArr[i][1]) >= new Date(startDate))) {
+                else if ((new Date(currBookingsArr[i][0]) <= new Date(startDate)) && (new Date(currBookingsArr[i][1]) >= new Date(startDate)) && currBookingsArr[i][2] !== bookingId) {
                     errors.push('Start Date is within already existing booking');
-                } else if ((new Date(currBookingsArr[i][0]) <= new Date(endDate)) && (new Date(currBookingsArr[i][1]) >= new Date(endDate))) {
+                    setValidationErrors(errors);
+                    return
+                } else if ((new Date(currBookingsArr[i][0]) <= new Date(endDate)) && (new Date(currBookingsArr[i][1]) >= new Date(endDate)) && currBookingsArr[i][2] !== bookingId) {
                     errors.push('End Date is within already existing booking');
+                    setValidationErrors(errors);
+                    return
                 }
             }
         }
