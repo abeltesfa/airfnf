@@ -14,7 +14,7 @@ const About = () => {
                     <img className='aboutPic' alt='about' src={aboutPic}></img>
                 </div>
                 <div>
-                    Link to the project <a href='https://github.com/abeltesfa/SoloProjectAAReduxReact'>repo</a>
+                    Link to the project <a href='https://github.com/abeltesfa/airfnf'>repo</a>
                 </div>
 
                 <div>

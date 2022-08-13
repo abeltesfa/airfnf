@@ -5,7 +5,7 @@ import { addBookings, getCarBookings } from "../../store/bookings";
 import { deleteCar, getAllCars } from "../../store/cars";
 import BookingDetails from "../BookingDetails";
 import ErrorModal from "../ErrorModal";
-import { addHours, addDays } from 'date-fns';
+import { addHours, format } from 'date-fns';
 import './CarDetails.css'
 // import { formatInTimeZone } from 'date-fns-tz';
 
@@ -26,10 +26,11 @@ const CarDetails = ({ sessionUser }) => {
     // const [hasSubmitted, setHasSubmitted] = useState(false);
     const [validationErrors, setValidationErrors] = useState([]);
     const timezoneOffset = new Date().getTimezoneOffset() / 60;
-    const convertedToday = addHours(new Date(), timezoneOffset);
+    const timezoneToday = addHours(new Date(), timezoneOffset);
     const currBookingsArr = [];
-    const currentBookings = Object.values(bookings).map(booking => currBookingsArr.push([addHours(new Date(booking.startDate), timezoneOffset), addHours(new Date(booking.endDate), timezoneOffset)]))
-
+    Object.values(bookings).map(booking => currBookingsArr.push([addHours(new Date(booking.startDate), timezoneOffset), addHours(new Date(booking.endDate), timezoneOffset)]))
+    const formatToday = format(timezoneToday, 'yyyy-MM-dd');
+    const convertedToday = new Date(formatToday);
 
 
     // const dateRangeArr = [];
@@ -81,8 +82,6 @@ const CarDetails = ({ sessionUser }) => {
                 }
             }
         }
-
-
         setValidationErrors(errors);
     }, [startDate, endDate]);
 
@@ -90,10 +89,6 @@ const CarDetails = ({ sessionUser }) => {
         await dispatch(deleteCar(pCarId.carId))
         history.push('/');
     }
-
-    // const bookingOnDelete = async (bookingId) => {
-    //     await dispatch(deleteBooking(bookingId))
-    // }
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -122,7 +117,6 @@ const CarDetails = ({ sessionUser }) => {
     //     } else setEditBookingForm(false)
     // }
 
-    console.log(Object.keys(bookings).length)
     return (
         specificCar && specificCar.images ?
             <div className="page-outer">
