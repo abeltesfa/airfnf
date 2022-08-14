@@ -15,19 +15,19 @@ const CarEdit = () => {
     }, [dispatch])
 
 
-    const [carYear, setCarYear] = useState(specificCar.carYear);
-    const [make, setMake] = useState(specificCar.make);
-    const [model, setModel] = useState(specificCar.model);
-    const [city, setCity] = useState(specificCar.city);
-    const [state, setState] = useState(specificCar.state);
-    const [country, setCountry] = useState(specificCar.country);
-    const [description, setDescription] = useState(specificCar.description);
-    const [price, setPrice] = useState(specificCar.price);
-    const [image1, setImage1] = useState(specificCar.images[0].url);
-    const [image2, setImage2] = useState(specificCar.images[1].url);
-    const [image3, setImage3] = useState(specificCar.images[2].url);
-    const [image4, setImage4] = useState(specificCar.images[3].url);
-    const [image5, setImage5] = useState(specificCar.images[4].url);
+    const [carYear, setCarYear] = useState(specificCar?.carYear);
+    const [make, setMake] = useState(specificCar?.make);
+    const [model, setModel] = useState(specificCar?.model);
+    const [city, setCity] = useState(specificCar?.city);
+    const [state, setState] = useState(specificCar?.state);
+    const [country, setCountry] = useState(specificCar?.country);
+    const [description, setDescription] = useState(specificCar?.description);
+    const [price, setPrice] = useState(specificCar?.price);
+    const [image1, setImage1] = useState(specificCar?.images[0].url);
+    const [image2, setImage2] = useState(specificCar?.images[1].url);
+    const [image3, setImage3] = useState(specificCar?.images[2].url);
+    const [image4, setImage4] = useState(specificCar?.images[3].url);
+    const [image5, setImage5] = useState(specificCar?.images[4].url);
     // const [hasSubmitted, setHasSubmitted] = useState(false);
     const [showModal, setShowModal] = useState(false);
     const [validationErrors, setValidationErrors] = useState([]);
@@ -42,34 +42,34 @@ const CarEdit = () => {
         if (!make) {
             errors.push('Please select a make.')
         }
-        if (model.length <= 0) {
+        if (model?.length <= 0) {
             errors.push('Please enter a model name.');
         }
-        if (model.length > 40) {
+        if (model?.length > 40) {
             errors.push('Model name cannot be more than 40 characters.');
         }
-        if (city.length <= 0) {
+        if (city?.length <= 0) {
             errors.push('Please enter a city.');
         }
-        if (city.length > 85) {
+        if (city?.length > 85) {
             errors.push('City name cannot be more than 85 characters.');
         }
-        if (state.length <= 0) {
+        if (state?.length <= 0) {
             errors.push('Please enter a state. Enter N/A if not applicable.');
         }
-        if (state.length > 20) {
+        if (state?.length > 20) {
             errors.push('State name cannot be longer than 20 characters.');
         }
-        if (country.length <= 0) {
+        if (country?.length <= 0) {
             errors.push('Please enter a country.');
         }
-        if (country.length > 57) {
+        if (country?.length > 57) {
             errors.push('Country name cannot be more than 57 characters.');
         }
-        if (description.length <= 0) {
+        if (description?.length <= 0) {
             errors.push('Please enter a description');
         }
-        if (description.length > 1000) {
+        if (description?.length > 1000) {
             errors.push('Description cannot be more than 1000 characters.');
         }
         if (price <= 0) {
@@ -90,19 +90,19 @@ const CarEdit = () => {
         if (!image5) {
             errors.push('Please enter a value for image5')
         }
-        if (!image1.endsWith('.jpg') && !image1.endsWith('.jpeg') && !image1.endsWith('.png')) {
+        if (!image1?.endsWith('.jpg') && !image1.endsWith('.jpeg') && !image1.endsWith('.png')) {
             errors.push('Image1 must end in .jpg, .jpeg, or .png')
         }
-        if (!image2.endsWith('.jpg') && !image2.endsWith('.jpeg') && !image2.endsWith('.png')) {
+        if (!image2?.endsWith('.jpg') && !image2.endsWith('.jpeg') && !image2.endsWith('.png')) {
             errors.push('Image2 must end in .jpg, .jpeg, or .png')
         }
-        if (!image3.endsWith('.jpg') && !image3.endsWith('.jpeg') && !image3.endsWith('.png')) {
+        if (!image3?.endsWith('.jpg') && !image3.endsWith('.jpeg') && !image3.endsWith('.png')) {
             errors.push('Image3 must end in .jpg, .jpeg, or .png')
         }
-        if (!image4.endsWith('.jpg') && !image4.endsWith('.jpeg') && !image4.endsWith('.png')) {
+        if (!image4?.endsWith('.jpg') && !image4.endsWith('.jpeg') && !image4.endsWith('.png')) {
             errors.push('Image4 must end in .jpg, .jpeg, or .png')
         }
-        if (!image5.endsWith('.jpg') && !image5.endsWith('.jpeg') && !image5.endsWith('.png')) {
+        if (!image5?.endsWith('.jpg') && !image5.endsWith('.jpeg') && !image5.endsWith('.png')) {
             errors.push('Image5 must end in .jpg, .jpeg, or .png')
         }
 

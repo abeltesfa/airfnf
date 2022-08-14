@@ -1,6 +1,8 @@
 .details-img-container{
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 10px;
 }
 
 .details-img{
@@ -9,9 +11,9 @@
     border-radius: 33px;
 }
 
-.details-container{
+/* .details-container{
     margin-left: 33px;
-}
+} */
 
 .details-delete-car-btn{
     border: 0;
@@ -36,17 +38,17 @@
     border-radius: 11px;
 }
 
-.details-create-booking-container label {
+/* .details-create-booking-container label {
     margin-left: 250px;
 }
 
 .details-create-booking-container h2 {
     margin-left: 250px;
-}
+} */
 
 .details-create-booking-container button {
     margin-top: 11px;
-    margin-left: 300px;
+    margin-left: 80px;
     border: 0;
     background-color: #FF385C;
     color: white;
@@ -69,4 +71,54 @@
     cursor: pointer;
     margin-left: 3px;
     margin-right: 3px;
+}
+
+.details-img-big{
+    grid-column: 1;
+    grid-row: 1/3;
+}
+
+.details-img-midtop{
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.details-img-midbottom{
+    grid-column: 2;
+    grid-row: 2;
+}
+
+.details-img-endtop{
+    grid-column: 3;
+    grid-row: 1;
+}
+
+.details-img-endbottom{
+    grid-column: 3;
+    grid-row: 2;
+}
+
+.details-img-big-img{
+    height: 490px;
+    width: 560px;
+}
+
+.details-img-midtop-img{
+    height: 238px;
+    width: 272px;
+}
+
+.details-img-midbottom-img{
+    height: 238px;
+    width: 272px;
+}
+
+.details-img-endtop-img{
+    height: 238px;
+    width: 272px;
+}
+
+.details-img-endbottom{
+    height: 238px;
+    width: 272px;
 }

@@ -45,7 +45,7 @@ function App() {
         <ProtectedRoute path='/cars/:carId/edit' exact={true} >
           <CarEdit />
         </ProtectedRoute>
-        <ProtectedRoute path={`/${sessionUser.username}`} exact={true} >
+        <ProtectedRoute path={`/${sessionUser?.username}`} exact={true} >
           <UserPage sessionUser={sessionUser} />
         </ProtectedRoute>
         <Route path='/' exact={true} >
