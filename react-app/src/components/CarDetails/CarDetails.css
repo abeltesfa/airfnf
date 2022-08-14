@@ -3,6 +3,8 @@
     grid-template-columns: 2fr 1fr 1fr;
     grid-template-rows: 1fr 1fr;
     gap: 10px;
+    border-bottom:  3px solid #f8f8f8;
+    padding-bottom: 15px;
 }
 
 .details-img{
@@ -18,24 +20,58 @@
 .details-delete-car-btn{
     border: 0;
     background-color: transparent;
-    color: #FF385C;
+    background-color: #FF385C;
+    color: white;
     font-weight: bolder;
     cursor: pointer;
-    margin-top: 7px;
     font-size: 16px;
-    margin-left: -5px;
+    /* padding: 5% 20%; */
+    width: 211px;
+    height: 37px;
+    border-radius: 15px;
+
 }
 
 .details-edit-car-btn{
     text-decoration: none;
-    color: #FF385C;
+    background-color: #FF385C;
+    color: white;
     font-weight: bolder;
+    display: block;
+    width: 211px;
+    height: 37px;
+    /* padding-right: 75px;
+    padding-left: 75px;
+    padding-top: 10px;
+    padding-bottom: 10px; */
+    border-radius: 15px;
+    text-align: center;
+    line-height: 37px;
+
 }
 
 .details-create-booking-container{
-    border: 3px #f8f8f8 solid;
-    margin-right: 700px;
+    display: flex;
+    flex-direction: column;
+    gap:5px;
+    justify-content: center;
+    align-items: center;
+    border: 3px #D8D8D8 solid;
     border-radius: 11px;
+    width:44%;
+    min-width: 450px;
+    max-height: 540px;
+    padding-bottom: 15px;
+    /* margin-top: -10px; */
+}
+.details-create-booking-container form{
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+    justify-content: center;
+    align-items: center;
+    max-height: 540px;
+
 }
 
 /* .details-create-booking-container label {
@@ -48,7 +84,7 @@
 
 .details-create-booking-container button {
     margin-top: 11px;
-    margin-left: 80px;
+    /* margin-left: 80px; */
     border: 0;
     background-color: #FF385C;
     color: white;
@@ -121,4 +157,35 @@
 .details-img-endbottom{
     height: 238px;
     width: 272px;
+}
+
+.details-createandcurrent-container{
+    display: flex;
+    justify-content: space-between;
+}
+
+.details-editanddelete-btns{
+    display: flex;
+    justify-content: space-evenly;
+    padding-bottom: 15px
+}
+
+.details-currentbookings-container{
+    border: 3px #D8D8D8 solid;
+    border-radius: 11px;
+    width:44%;
+    display: flex;
+    flex-direction: column;
+    gap:5px;
+    justify-content: flex-start;
+    align-items: center;
+    max-height: 540px;
+    overflow: auto;
+    padding-bottom: 15px;
+    min-width: 450px;
+}
+
+.details-currentbookings-single{
+    padding-bottom: 10px;
+    border-bottom: #D8D8D8 3px solid;
 }

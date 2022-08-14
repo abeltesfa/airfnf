@@ -150,11 +150,14 @@ const CarDetails = ({ sessionUser }) => {
                         <p>{specificCar.description}</p>
                         <p>Location: {specificCar.city} {specificCar.state} {specificCar.country}</p>
                         <p>Price: ${specificCar.price}</p>
+
                         {specificCar?.userId === sessionUser?.id && (
-                            <div>
-                                <NavLink to={`/cars/${specificCar.id}/edit`} className="details-edit-car-btn">
-                                    Car Edit
-                                </NavLink>
+                            <div className="details-editanddelete-btns">
+                                <div>
+                                    <NavLink to={`/cars/${specificCar.id}/edit`} className="details-edit-car-btn">
+                                        Car Edit
+                                    </NavLink>
+                                </div>
                                 <div>
                                     <button className="details-delete-car-btn" onClick={onDelete}>Delete Car</button>
                                 </div>
@@ -162,10 +165,11 @@ const CarDetails = ({ sessionUser }) => {
                         )}
 
 
-                        {sessionUser ?
-                            <div className="details-create-booking-container">
-                                <h2>Create Booking</h2>
-                                {/* {hasSubmitted && validationErrors.length > 0 && (
+                        <div className='details-createandcurrent-container'>
+                            {sessionUser ?
+                                <div className="details-create-booking-container">
+                                    <h2>Create Booking</h2>
+                                    {/* {hasSubmitted && validationErrors.length > 0 && (
                         <div>
                             The following errors were found:
                             <ul>
@@ -175,35 +179,36 @@ const CarDetails = ({ sessionUser }) => {
                             </ul>
                         </div>
                     )} */}
-                                <ErrorModal hideModal={() => setShowModal(false)} showModal={showModal} validationErrors={validationErrors} />
-                                <form onSubmit={onSubmit}>
-                                    <div>
-                                        <label htmlFor="startDate">Start Date:</label>
-                                        <input id="startDate" type="date" onChange={e => setStartDate(e.target.value)} value={startDate} />
-                                    </div>
-                                    <div>
-                                        <label htmlFor="endDate">End Date:</label>
-                                        <input id="endDate" type="date" onChange={e => setEndDate(e.target.value)} value={endDate} />
-                                    </div>
-                                    <div>
-                                        <button>Submit</button>
-                                    </div>
-                                </form>
-                            </div>
-                            : null
-                        }
-                        <div>
-                            <h3>Current Bookings</h3>
-                            {Object.keys(bookings).length ?
-                                null
-                                : <h4>No Current Bookings listed...</h4>
+                                    <ErrorModal hideModal={() => setShowModal(false)} showModal={showModal} validationErrors={validationErrors} />
+                                    <form onSubmit={onSubmit}>
+                                        <div>
+                                            <label htmlFor="startDate">Start Date:</label>
+                                            <input id="startDate" type="date" onChange={e => setStartDate(e.target.value)} value={startDate} />
+                                        </div>
+                                        <div>
+                                            <label htmlFor="endDate">End Date:</label>
+                                            <input id="endDate" type="date" onChange={e => setEndDate(e.target.value)} value={endDate} />
+                                        </div>
+                                        <div>
+                                            <button>Submit</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                : null
                             }
-                            <div>
-                                {Object.values(bookings).map((booking) => (
-                                    <div key={booking?.id}>
-                                        <BookingDetails booking={booking} carId={carId} sessionUser={sessionUser} />
-                                    </div>
-                                ))}
+                            <div className="details-currentbookings-container">
+                                <h3>Current Bookings</h3>
+                                {Object.keys(bookings).length ?
+                                    null
+                                    : <h4>No Current Bookings listed...</h4>
+                                }
+                                <div>
+                                    {Object.values(bookings).map((booking) => (
+                                        <div className="details-currentbookings-single" key={booking?.id}>
+                                            <BookingDetails booking={booking} carId={carId} sessionUser={sessionUser} />
+                                        </div>
+                                    ))}
+                                </div>
                             </div>
                         </div>
                     </div>

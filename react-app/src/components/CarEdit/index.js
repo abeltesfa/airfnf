@@ -90,19 +90,19 @@ const CarEdit = () => {
         if (!image5) {
             errors.push('Please enter a value for image5')
         }
-        if (!image1?.endsWith('.jpg') && !image1.endsWith('.jpeg') && !image1.endsWith('.png')) {
+        if (!image1?.endsWith('.jpg') && !image1?.endsWith('.jpeg') && !image1?.endsWith('.png')) {
             errors.push('Image1 must end in .jpg, .jpeg, or .png')
         }
-        if (!image2?.endsWith('.jpg') && !image2.endsWith('.jpeg') && !image2.endsWith('.png')) {
+        if (!image2?.endsWith('.jpg') && !image2?.endsWith('.jpeg') && !image2?.endsWith('.png')) {
             errors.push('Image2 must end in .jpg, .jpeg, or .png')
         }
-        if (!image3?.endsWith('.jpg') && !image3.endsWith('.jpeg') && !image3.endsWith('.png')) {
+        if (!image3?.endsWith('.jpg') && !image3?.endsWith('.jpeg') && !image3?.endsWith('.png')) {
             errors.push('Image3 must end in .jpg, .jpeg, or .png')
         }
-        if (!image4?.endsWith('.jpg') && !image4.endsWith('.jpeg') && !image4.endsWith('.png')) {
+        if (!image4?.endsWith('.jpg') && !image4?.endsWith('.jpeg') && !image4?.endsWith('.png')) {
             errors.push('Image4 must end in .jpg, .jpeg, or .png')
         }
-        if (!image5?.endsWith('.jpg') && !image5.endsWith('.jpeg') && !image5.endsWith('.png')) {
+        if (!image5?.endsWith('.jpg') && !image5?.endsWith('.jpeg') && !image5?.endsWith('.png')) {
             errors.push('Image5 must end in .jpg, .jpeg, or .png')
         }
 
