@@ -19,14 +19,14 @@ const BookingEdit = ({ carId, booking, hideForm, sessionUser}) => {
     // const [hasSubmitted, setHasSubmitted] = useState(false);
     const [showModal, setShowModal] = useState(false);
     const [validationErrors, setValidationErrors] = useState([]);
-    const formatToday = format(timezoneToday, 'yyyy-MM-dd');
-    const convertedToday = new Date(formatToday);
+    const formatToday = format(new Date(), 'yyyy-MM-dd');
+    const convertedToday = addHours(new Date(formatToday), timezoneOffset);
     const currBookingsArr = [];
     Object.values(bookings).map(booking => currBookingsArr.push([addHours(new Date(booking.startDate), timezoneOffset), addHours(new Date(booking.endDate), timezoneOffset), booking.id]))
 
     useEffect(() => {
         const errors = [];
-        if (new Date(startDate) < convertedToday) {
+        if (addHours(new Date(startDate), timezoneOffset) < convertedToday) {
             errors.push('Start date cannot be in the past.')
         }
         if (new Date(endDate) < new Date(startDate)) {

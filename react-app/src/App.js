@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import LoginForm from './components/auth/LoginForm';
-import SignUpForm from './components/auth/SignUpForm';
+// import LoginForm from './components/auth/LoginForm';
+// import SignUpForm from './components/auth/SignUpForm';
 import NavBar from './components/NavBar';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import { authenticate } from './store/session';
@@ -45,7 +45,7 @@ function App() {
         <ProtectedRoute path='/cars/:carId/edit' exact={true} >
           <CarEdit />
         </ProtectedRoute>
-        <ProtectedRoute path='/:username' exact={true} >
+        <ProtectedRoute path={`/${sessionUser.username}`} exact={true} >
           <UserPage sessionUser={sessionUser} />
         </ProtectedRoute>
         <Route path='/' exact={true} >

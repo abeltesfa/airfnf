@@ -29,8 +29,8 @@ const CarDetails = ({ sessionUser }) => {
     const timezoneToday = addHours(new Date(), timezoneOffset);
     const currBookingsArr = [];
     Object.values(bookings).map(booking => currBookingsArr.push([addHours(new Date(booking.startDate), timezoneOffset), addHours(new Date(booking.endDate), timezoneOffset)]))
-    const formatToday = format(timezoneToday, 'yyyy-MM-dd');
-    const convertedToday = new Date(formatToday);
+    const formatToday = format(new Date(), 'yyyy-MM-dd');
+    const convertedToday = addHours(new Date(formatToday), timezoneOffset);
 
 
     // const dateRangeArr = [];
@@ -50,7 +50,6 @@ const CarDetails = ({ sessionUser }) => {
     //     dateRange(new Date(currBookingsArr[0][0]), new Date(currBookingsArr[0][1]))
     // }
 
-
     useEffect(() => {
         dispatch(getAllCars())
         dispatch(getCarBookings(pCarId.carId))
@@ -58,7 +57,7 @@ const CarDetails = ({ sessionUser }) => {
 
     useEffect(() => {
         const errors = [];
-        if (new Date(startDate) < convertedToday) {
+        if (addHours(new Date(startDate), timezoneOffset) < convertedToday) {
             errors.push('Start date cannot be in the past.')
         }
         if (new Date(endDate) < new Date(startDate)) {
@@ -66,16 +65,16 @@ const CarDetails = ({ sessionUser }) => {
         }
         if (currBookingsArr) {
             for (let i = 0; i < currBookingsArr.length; i++) {
-                if (new Date(startDate) < new Date(currBookingsArr[i][0]) && new Date(endDate) > new Date(currBookingsArr[i][1])) {
+                if ((new Date(startDate)) < new Date(currBookingsArr[i][0]) && new Date(endDate) > new Date(currBookingsArr[i][1])) {
                     errors.push('Booking includes existing booking')
                     setValidationErrors(errors);
                     return
                 }
-                else if ((new Date(currBookingsArr[i][0]) <= new Date(startDate)) && (new Date(currBookingsArr[i][1]) >= new Date(startDate))) {
+                else if ((new Date(currBookingsArr[i][0]) <= addHours(new Date(startDate), timezoneOffset)) && (new Date(currBookingsArr[i][1]) >= addHours(new Date(startDate), timezoneOffset))) {
                     errors.push('Start Date is within already existing booking');
                     setValidationErrors(errors);
                     return
-                } else if ((new Date(currBookingsArr[i][0]) <= new Date(endDate)) && (new Date(currBookingsArr[i][1]) >= new Date(endDate))) {
+                } else if ((new Date(currBookingsArr[i][0]) <= addHours(new Date(endDate), timezoneOffset)) && (new Date(currBookingsArr[i][1]) >= addHours(new Date(endDate), timezoneOffset))) {
                     errors.push('End Date is within already existing booking');
                     setValidationErrors(errors);
                     return
