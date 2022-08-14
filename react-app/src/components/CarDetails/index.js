@@ -119,36 +119,57 @@ const CarDetails = ({ sessionUser }) => {
     return (
         specificCar && specificCar.images ?
             <div className="page-outer">
-                <div className="details-container">
-                    <h1>Car Details</h1>
+                <div className="page-margin-add"></div>
+                <div className="page-info">
+                    <div className="details-container">
+                        <h1>Car Details</h1>
 
-                    <div className="details-img-container">
-                        {specificCar.images.map(pic => (
+                        <div className="details-img-container">
+                            {/* {specificCar.images.map(pic => (
                             <div key={pic.id}>
                                 <img className="details-img" src={pic.url} onError={(e) => { e.target.onError = null; e.target.src = 'https://cdn-icons-png.flaticon.com/512/2137/2137884.png' }} alt=''></img>
                             </div>
-                        ))}
-                    </div>
-                    <p>{specificCar.carYear} {specificCar.make} {specificCar.model}</p>
-                    <p>{specificCar.description}</p>
-                    <p>Location: {specificCar.city} {specificCar.state} {specificCar.country}</p>
-                    <p>Price: ${specificCar.price}</p>
-                    {specificCar?.userId === sessionUser?.id && (
-                        <div>
-                            <NavLink to={`/cars/${specificCar.id}/edit`} className="details-edit-car-btn">
-                                Car Edit
-                            </NavLink>
-                            <div>
-                                <button className="details-delete-car-btn" onClick={onDelete}>Delete Car</button>
+                        ))} */}
+                            <div className="details-img-big">
+                                <img src={specificCar.images[0]?.url} className='details-img-big-img' alt='' />
+                            </div>
+                            <div className="details-img-midtop">
+                                <img src={specificCar.images[1]?.url} className="details-img-midtop-img" alt='' />
+                            </div>
+                            <div className="details-img-midbottom">
+                                <img src={specificCar.images[2]?.url} className="details-img-midbottom-img" alt='' />
+                            </div>
+                            <div className="details-img-endtop">
+                                <img src={specificCar.images[3]?.url} className="details-img-endtop-img" alt='' />
+                            </div>
+                            <div className="details-img-endbottom">
+                                <img src={specificCar.images[4]?.url} className="details-img-endbottom" alt='' />
                             </div>
                         </div>
-                    )}
+                        <p>{specificCar.carYear} {specificCar.make} {specificCar.model}</p>
+                        <p>{specificCar.description}</p>
+                        <p>Location: {specificCar.city} {specificCar.state} {specificCar.country}</p>
+                        <p>Price: ${specificCar.price}</p>
+
+                        {specificCar?.userId === sessionUser?.id && (
+                            <div className="details-editanddelete-btns">
+                                <div>
+                                    <NavLink to={`/cars/${specificCar.id}/edit`} className="details-edit-car-btn">
+                                        Car Edit
+                                    </NavLink>
+                                </div>
+                                <div>
+                                    <button className="details-delete-car-btn" onClick={onDelete}>Delete Car</button>
+                                </div>
+                            </div>
+                        )}
 
 
-                    {sessionUser ?
-                        <div className="details-create-booking-container">
-                            <h2>Create Booking</h2>
-                            {/* {hasSubmitted && validationErrors.length > 0 && (
+                        <div className='details-createandcurrent-container'>
+                            {sessionUser ?
+                                <div className="details-create-booking-container">
+                                    <h2>Create Booking</h2>
+                                    {/* {hasSubmitted && validationErrors.length > 0 && (
                         <div>
                             The following errors were found:
                             <ul>
@@ -158,35 +179,37 @@ const CarDetails = ({ sessionUser }) => {
                             </ul>
                         </div>
                     )} */}
-                            <ErrorModal hideModal={() => setShowModal(false)} showModal={showModal} validationErrors={validationErrors} />
-                            <form onSubmit={onSubmit}>
+                                    <ErrorModal hideModal={() => setShowModal(false)} showModal={showModal} validationErrors={validationErrors} />
+                                    <form onSubmit={onSubmit}>
+                                        <div>
+                                            <label htmlFor="startDate">Start Date:</label>
+                                            <input id="startDate" type="date" onChange={e => setStartDate(e.target.value)} value={startDate} />
+                                        </div>
+                                        <div>
+                                            <label htmlFor="endDate">End Date:</label>
+                                            <input id="endDate" type="date" onChange={e => setEndDate(e.target.value)} value={endDate} />
+                                        </div>
+                                        <div>
+                                            <button>Submit</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                : null
+                            }
+                            <div className="details-currentbookings-container">
+                                <h3>Current Bookings</h3>
+                                {Object.keys(bookings).length ?
+                                    null
+                                    : <h4>No Current Bookings listed...</h4>
+                                }
                                 <div>
-                                    <label htmlFor="startDate">Start Date:</label>
-                                    <input id="startDate" type="date" onChange={e => setStartDate(e.target.value)} value={startDate} />
+                                    {Object.values(bookings).map((booking) => (
+                                        <div className="details-currentbookings-single" key={booking?.id}>
+                                            <BookingDetails booking={booking} carId={carId} sessionUser={sessionUser} />
+                                        </div>
+                                    ))}
                                 </div>
-                                <div>
-                                    <label htmlFor="endDate">End Date:</label>
-                                    <input id="endDate" type="date" onChange={e => setEndDate(e.target.value)} value={endDate} />
-                                </div>
-                                <div>
-                                    <button>Submit</button>
-                                </div>
-                            </form>
-                        </div>
-                        : null
-                    }
-                    <div>
-                        <h3>Current Bookings</h3>
-                        {Object.keys(bookings).length ?
-                            null
-                            : <h4>No Current Bookings listed...</h4>
-                        }
-                        <div>
-                            {Object.values(bookings).map((booking) => (
-                                <div key={booking?.id}>
-                                    <BookingDetails booking={booking} carId={carId} sessionUser={sessionUser} />
-                                </div>
-                            ))}
+                            </div>
                         </div>
                     </div>
                 </div>
