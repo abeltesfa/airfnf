@@ -27,6 +27,7 @@ const CreateCar = () => {
     const history = useHistory();
 
     useEffect(() => {
+        const rePrice = /^\d*(\.\d{0,2})?$/
         const errors = [];
         if (!carYear) {
             errors.push('Please select a car year.');
@@ -66,6 +67,9 @@ const CreateCar = () => {
         }
         if (price <= 0) {
             errors.push('Price cannot be zero or a negative number')
+        }
+        if (!rePrice.test(price)) {
+            errors.push('Please enter valid price with 2 decimal places')
         }
         if (!image1) {
             errors.push('Please enter a value for image1')
@@ -259,7 +263,7 @@ const CreateCar = () => {
                         </div>
                         <div>
                             <label htmlFor="price">Price:*</label>
-                            <input id="price" type="number" onChange={e => setPrice(e.target.value)} value={price} />
+                            <input id="price" type="number" step=".01" onChange={e => setPrice(e.target.value)} value={price} />
                         </div>
                         <div>
                             <label htmlFor="image1">Image1:*</label>

@@ -65,19 +65,19 @@ const UserPage = ({ sessionUser }) => {
                                 ))}
                             </div>
                         </div>
-                        <div>
+                        <div className="userprofile-bookingpricesummary-container">
                             <h3>Booking Price Summary</h3>
                             <div>
                                 <div>
                                     {priceArr.map(price => (
-                                        <div>
+                                        <div className="userprofile-singlebookingprice">
                                             <p>Car: {cars[price[0]]?.carYear} {cars[price[0]]?.model} </p>
                                             <p>Number of Days: {price[1]} * Price: {price[2]}</p>
                                         </div>
                                     ))}
                                 </div>
                                 <div>
-                                    <h4>Total Price: ${totalPrice}</h4>
+                                    <h4>Total Price: ${totalPrice.toFixed(2)}</h4>
                                 </div>
                             </div>
                         </div>
