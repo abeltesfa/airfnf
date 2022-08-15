@@ -57,6 +57,12 @@ const CarDetails = ({ sessionUser }) => {
 
     useEffect(() => {
         const errors = [];
+        if(!startDate){
+            errors.push('Start date must be entered')
+        }
+        if(!endDate){
+            errors.push('End date must be entered')
+        }
         if (addHours(new Date(startDate), timezoneOffset) < convertedToday) {
             errors.push('Start date cannot be in the past.')
         }
@@ -131,19 +137,19 @@ const CarDetails = ({ sessionUser }) => {
                             </div>
                         ))} */}
                             <div className="details-img-big">
-                                <img src={specificCar.images[0]?.url} className='details-img-big-img' alt='' />
+                                <img src={specificCar.images[0]?.url} className='details-img-big-img' onError={(e) => { e.target.onError = null; e.target.src = 'https://instaspambucket.s3.amazonaws.com/410ad2d60dcb491fad634907562cd176.png'}} alt='' />
                             </div>
                             <div className="details-img-midtop">
-                                <img src={specificCar.images[1]?.url} className="details-img-midtop-img" alt='' />
+                                <img src={specificCar.images[1]?.url} className="details-img-midtop-img" onError={(e) => { e.target.onError = null; e.target.src = 'https://instaspambucket.s3.amazonaws.com/410ad2d60dcb491fad634907562cd176.png'}} alt='' />
                             </div>
                             <div className="details-img-midbottom">
-                                <img src={specificCar.images[2]?.url} className="details-img-midbottom-img" alt='' />
+                                <img src={specificCar.images[2]?.url} className="details-img-midbottom-img" onError={(e) => { e.target.onError = null; e.target.src = 'https://instaspambucket.s3.amazonaws.com/410ad2d60dcb491fad634907562cd176.png'}} alt='' />
                             </div>
                             <div className="details-img-endtop">
-                                <img src={specificCar.images[3]?.url} className="details-img-endtop-img" alt='' />
+                                <img src={specificCar.images[3]?.url} className="details-img-endtop-img" onError={(e) => { e.target.onError = null; e.target.src = 'https://instaspambucket.s3.amazonaws.com/410ad2d60dcb491fad634907562cd176.png'}} alt='' />
                             </div>
                             <div className="details-img-endbottom">
-                                <img src={specificCar.images[4]?.url} className="details-img-endbottom" alt='' />
+                                <img src={specificCar.images[4]?.url} className="details-img-endbottom" onError={(e) => { e.target.onError = null; e.target.src = 'https://instaspambucket.s3.amazonaws.com/410ad2d60dcb491fad634907562cd176.png'}} alt='' />
                             </div>
                         </div>
                         <div className="details-cardetails-container">

@@ -51,7 +51,7 @@ const HomePage = ({ sessionUser }) => {
                         {Object.values(cars).map((car) => (
                             <div className="home-single-car" key={car?.id}>
                                 <NavLink to={`/cars/${car.id}`}>
-                                    <img className="home-car-img" src={car.images[0]?.url} onError={(e) => { e.target.onError = null; e.target.src = 'https://cdn-icons-png.flaticon.com/512/2137/2137884.png' }} alt=""></img>
+                                    <img className="home-car-img" src={car.images[0]?.url} onError={(e) => { e.target.onError = null; e.target.src = 'https://instaspambucket.s3.amazonaws.com/410ad2d60dcb491fad634907562cd176.png' }} alt=""></img>
                                     <p>{car.carYear} {car.make} {car.model}</p>
                                 </NavLink>
                             </div>

@@ -42,3 +42,7 @@
     border-radius: 2px;
     border: solid 1px #D8D8D8;
 }
+
+.car-textarea{
+    resize: none;
+}
