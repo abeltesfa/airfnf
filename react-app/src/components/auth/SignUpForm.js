@@ -60,8 +60,8 @@ const SignUpForm = () => {
         ))}
       </div> */}
       <ErrorModal hideModal={() => setShowModal(false)} showModal={showModal} validationErrors={errors} />
-      <div>
-        <label>User Name</label>
+      <div className='home-splash-right-labelandinput'>
+        <label>User Name*</label>
         <input
           type='text'
           name='username'
@@ -69,8 +69,8 @@ const SignUpForm = () => {
           value={username}
         ></input>
       </div>
-      <div>
-        <label>Name</label>
+      <div className='home-splash-right-labelandinput'>
+        <label>Name*</label>
         <input
           type='text'
           name='name'
@@ -78,8 +78,8 @@ const SignUpForm = () => {
           value={name}
         ></input>
       </div>
-      <div>
-        <label>Email</label>
+      <div className='home-splash-right-labelandinput'>
+        <label>Email*</label>
         <input
           type='text'
           name='email'
@@ -87,8 +87,8 @@ const SignUpForm = () => {
           value={email}
         ></input>
       </div>
-      <div>
-        <label>Password</label>
+      <div className='home-splash-right-labelandinput'>
+        <label>Password*</label>
         <input
           type='password'
           name='password'
@@ -96,8 +96,8 @@ const SignUpForm = () => {
           value={password}
         ></input>
       </div>
-      <div>
-        <label>Repeat Password</label>
+      <div className='home-splash-right-labelandinput'>
+        <label>Repeat Password*</label>
         <input
           type='password'
           name='repeat_password'
@@ -106,7 +106,8 @@ const SignUpForm = () => {
           required={true}
         ></input>
       </div>
-      <button type='submit'>Sign Up</button>
+      <div>*Required Field</div>
+      <button className='single-btn-airbnb-color' type='submit'>Sign Up</button>
     </form>
   );
 };

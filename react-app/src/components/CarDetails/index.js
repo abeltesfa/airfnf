@@ -146,11 +146,12 @@ const CarDetails = ({ sessionUser }) => {
                                 <img src={specificCar.images[4]?.url} className="details-img-endbottom" alt='' />
                             </div>
                         </div>
-                        <p>{specificCar.carYear} {specificCar.make} {specificCar.model}</p>
-                        <p>{specificCar.description}</p>
-                        <p>Location: {specificCar.city} {specificCar.state} {specificCar.country}</p>
-                        <p>Price: ${specificCar.price}</p>
-
+                        <div className="details-cardetails-container">
+                            <p>{specificCar.carYear} {specificCar.make} {specificCar.model}</p>
+                            <p>{specificCar.description}</p>
+                            <p>Location: {specificCar.city} {specificCar.state} {specificCar.country}</p>
+                            <p>Price: ${specificCar.price}</p>
+                        </div>
                         {specificCar?.userId === sessionUser?.id && (
                             <div className="details-editanddelete-btns">
                                 <div>

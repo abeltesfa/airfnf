@@ -11,11 +11,15 @@
 
 .userprofile-booking-container{
     border-radius: 2px;
-    border: solid 1px #D8D8D8;
+    border-bottom: solid 3px #D8D8D8;
     margin: auto;
 }
 .userprofile-booking-container *{
     display: flex;
     flex-direction: column;
     margin-left: 20px;
+}
+
+.userprofile-container{
+    display: flex;
 }

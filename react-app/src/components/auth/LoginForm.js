@@ -45,7 +45,7 @@ const LoginForm = () => {
         ))}
       </div> */}
       <ErrorModal hideModal={() => setShowModal(false)} showModal={showModal} validationErrors={errors} />
-      <div>
+      <div className='home-splash-right-labelandinput'>
         <label htmlFor='email'>Email</label>
         <input
           name='email'
@@ -55,7 +55,7 @@ const LoginForm = () => {
           onChange={updateEmail}
         />
       </div>
-      <div>
+      <div className='home-splash-right-labelandinput'>
         <label htmlFor='password'>Password</label>
         <input
           name='password'
@@ -64,8 +64,8 @@ const LoginForm = () => {
           value={password}
           onChange={updatePassword}
         />
-        <button type='submit'>Login</button>
       </div>
+      <button className='single-btn-airbnb-color' type='submit'>Login</button>
     </form>
   );
 };
