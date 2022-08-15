@@ -155,7 +155,7 @@ const CarDetails = ({ sessionUser }) => {
                         {specificCar?.userId === sessionUser?.id && (
                             <div className="details-editanddelete-btns">
                                 <div>
-                                    <NavLink to={`/cars/${specificCar.id}/edit`} className="details-edit-car-btn">
+                                    <NavLink to={{pathname:`/cars/${specificCar.id}/edit`, state:{specificCar: specificCar}}} className="details-edit-car-btn">
                                         Car Edit
                                     </NavLink>
                                 </div>

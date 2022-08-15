@@ -37,3 +37,7 @@ body * {
     overflow-wrap: break-word;
     word-wrap: break-word;
 }
+
+.error404{
+    margin-top: 100px;
+}
