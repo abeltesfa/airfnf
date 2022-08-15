@@ -1,4 +1,4 @@
-#airfnf
+# airfnf
 
 ## Introduction
 Welcome to airfnf short for airFastNFurious, a clone of the popular airbnb website. airfnf allows you to create a user who can either add cars to be booked or book cars that exist on the website. The current bookings are listed on every car page for the users information. Enjoy the wide selection of cars and even create a user to add more. 
