@@ -46,3 +46,8 @@
 .car-textarea{
     resize: none;
 }
+
+.caredit-btns-container{
+    display: flex;
+    justify-content: space-evenly;
+}

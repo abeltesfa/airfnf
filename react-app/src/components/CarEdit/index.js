@@ -114,7 +114,9 @@ const CarEdit = () => {
         setValidationErrors(errors);
     }, [carYear, make, model, city, state, country, description, price, image1, image2, image3, image4, image5]);
 
-
+    const cancelBtn = () => {
+        history.push(`/cars/${carId}`);
+    }
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -299,8 +301,9 @@ const CarEdit = () => {
                                     <label htmlFor="image5">Image5 URL:</label>
                                     <input id="image5" type="url" onChange={e => setImage5(e.target.value)} value={image5} />
                                 </div>
-                                <div>
+                                <div className="caredit-btns-container">
                                     <button className="single-btn-airbnb-color">Submit</button>
+                                    <button type="button" className="single-btn-airbnb-color" onClick={cancelBtn}>Cancel</button>
                                 </div>
                             </form>
 
