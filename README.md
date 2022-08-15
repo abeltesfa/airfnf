@@ -1,129 +1,72 @@
-# Flask React Project
+#airfnf
 
-This is the starter for the Flask React project.
+## Introduction
+Welcome to airfnf short for airFastNFurious, a clone of the popular airbnb website. airfnf allows you to create a user who can either add cars to be booked or book cars that exist on the website. The current bookings are listed on every car page for the users information. Enjoy the wide selection of cars and even create a user to add more. 
 
-## Getting started
-1. Clone this repository (only this branch)
+## Technologies Used
+- Languages: Javascript, HTML, CSS
+- Front-End: React-Redux, JSX
+- Back-End: Python, Flask-SQLAlchemy
+- Database: PostgreSQL
+- Hosting: Heroku
 
-   ```bash
-   git clone https://github.com/appacademy-starters/python-project-starter.git
-   ```
+## Link to live site
+https://air-fnf.herokuapp.com/
 
-2. Install dependencies
+## Link to the wikidocs
+https://github.com/abeltesfa/airfnf/wiki
 
-      ```bash
-      pipenv install --dev -r dev-requirements.txt && pipenv install -r requirements.txt
-      ```
+## Features
 
-3. Create a **.env** file based on the example with proper settings for your
-   development environment
-4. Setup your PostgreSQL user, password and database and make sure it matches your **.env** file
+### Register/Sign-in
+Users can register an account or sign in with airfnf on the home page. The home page serves as both the splash page and a place where the user can sign in or register. Users must sign in with the email and password used when signing up. Users do not need to be signed in to view the home page.
 
-5. Get into your pipenv, migrate your database, seed your database, and run your flask app
+![image](https://user-images.githubusercontent.com/99838762/184603321-717e96fd-e2f8-49fd-88bc-eca94482deef.png)
 
-   ```bash
-   pipenv shell
-   ```
+### View Specific Cars
+Users whether logged in or not can click on specific cars and view the details surrounding the cars. This includes the current bookings listed with the car.
 
-   ```bash
-   flask db upgrade
-   ```
+![image](https://user-images.githubusercontent.com/99838762/184604206-f6f45f56-df10-4cea-b970-d931ad9af376.png)
 
-   ```bash
-   flask seed all
-   ```
-
-   ```bash
-   flask run
-   ```
-
-6. To run the React App in development, checkout the [README](./react-app/README.md) inside the `react-app` directory.
-
-***
+![image](https://user-images.githubusercontent.com/99838762/184604282-fa0a03f9-17fe-4ecb-af33-909d9c5b5d35.png)
 
 
-*IMPORTANT!*
-   psycopg2-binary MUST remain a dev dependency because you can't install it on alpine-linux.
-   There is a layer in the Dockerfile that will install psycopg2 (not binary) for us.
-***
+### Create, Edit, or Delete a Car post
+Users can create a new car post to add to airfnf. It requires the car year, make, model, city, state, country, description, price, and 5 image urls. The user who created the car can also edit the car post as well. 
 
-### Dev Containers (OPTIONAL for M1 Users)
-The following instructions detail an *optional* development setup for M1 Mac users having issues with the `psycopg` package.
+![image](https://user-images.githubusercontent.com/99838762/184605132-a98b179a-e2fe-4ba2-bb2e-5ff22c0f6cee.png)
 
-1. Make sure you have the [Microsoft Remote - Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension installed. 
-2. Make sure you have [Docker](https://www.docker.com/products/docker-desktop/) installed on your computer. 
-3. Clone the repository (only this branch)
-   ```bash
-   git clone https://github.com/appacademy-starters/python-project-starter.git
-   ```
-4. Open the repo in VS Code. 
-5. Click "Open in Container" when VS Code prompts to open container in the bottom right hand corner. 
-6. **Be Patient!** The initial install will take a LONG time, it's building a container that has postgres preconfigured and even installing all your project dependencies. (For both flask and react!)
+![image](https://user-images.githubusercontent.com/99838762/184605662-1226e743-17ad-4602-8523-54172c34d4b6.png)
 
-   **Note:** This will take much less time on future starts because everything will be cached.
+![image](https://user-images.githubusercontent.com/99838762/184605801-6a38b6a6-7136-4266-8cfb-ed7ce8bd6bf4.png)
 
-7. Once everything is up, be sure to make a `.env` file based on `.env.example` in both the root directory and the *react-app* directory before running your app. You do not need a `DATABASE_URL` in the `.env` file if you are using this Docker setup for development - the URL is already set in the image (see `.devcontainer/Dockerfile` for the URL).
 
-8. Get into your pipenv, migrate your database, seed your database, and run your flask app
+### Create Bookings on Cars
+Logged in users have the ability to create bookings on specific cars by going to the specific car page and selecting a start and end date. 
 
-   ```bash
-   pipenv shell
-   ```
+![image](https://user-images.githubusercontent.com/99838762/184606298-1b894510-5181-4b23-8c56-c0345e85ded9.png)
 
-   ```bash
-   flask db upgrade
-   ```
 
-   ```bash
-   flask seed all
-   ```
+### Edit or Delete Bookings on Cars
+Users who created a booking have the ability to edit the bookings they have created as well. 
 
-   ```bash
-   flask run
-   ```
+![image](https://user-images.githubusercontent.com/99838762/184606700-34a4c0fb-30b6-4c00-afd3-efcb77dbe334.png)
 
-9. To run the React App in development, checkout the [README](./react-app/README.md) inside the `react-app` directory.
+![image](https://user-images.githubusercontent.com/99838762/184606817-fd32f94f-8637-4dde-9397-b2b40af33f30.png)
 
-<br>
 
-## Deploy to Heroku
-This repo comes configured with Github Actions. When you push to your main branch, Github will automatically pull your code, package and push it to Heroku, and then release the new image and run db migrations. 
+### User Profile Page
+Logged in users have the ability to view the bookings associated with their account as well as the price of all the bookings added up.
 
-1. Write your Dockerfile. In order for the Github action to work effectively, it must have a configured Dockerfile. Follow the comments found in this [Dockerfile](./Dockerfile) to write your own!
+![image](https://user-images.githubusercontent.com/99838762/184607078-ec42f9c4-3470-48c0-bd8e-32c176e17807.png)
 
-2. Create a new project on Heroku.
+### Future features to implement
+- Reviews
+- AWS
+- Calendar
 
-3. Under Resources click "Find more add-ons" and add the add on called "Heroku Postgres".
+## Challenges Faced
+Dealing with dates and conversions proved to be a difficult task. There were timezone issues as well as general date conversion issues that had I had to be aware of when dealing with error validation for the bookings. It required the use of a package called date-fns that made the job a lot easier however there was still logic that had to be implemented when comparing dates across the database.
 
-4. Configure production environment variables. In your Heroku app settings -> config variables you should have two environment variables set:
 
-   |    Key          |    Value    |
-   | -------------   | ----------- |
-   | `DATABASE_URL`  | Autogenerated when adding postgres to Heroku app |
-   | `SECRET_KEY`    | Random string full of entropy |
 
-5. Generate a Heroku OAuth token for your Github Action. To do so, log in to Heroku via your command line with `heroku login`. Once you are logged in, run `heroku authorizations:create`. Copy the GUID value for the Token key.
-
-6. In your Github Actions Secrets you should have two environment variables set. You can set these variables via your Github repository settings -> secrets -> actions. Click "New respository secret" to create
-each of the following variables:
-
-   |    Key            |    Value    |
-   | -------------     | ----------- |
-   | `HEROKU_API_KEY`  | Heroku Oauth Token (from step 6)|
-   | `HEROKU_APP_NAME` | Heroku app name    |
-
-7. Push to your `main` branch! This will trigger the Github Action to build your Docker image and deploy your application to the Heroku container registry. Please note that the Github Action will automatically upgrade your production database with `flask db upgrade`. However, it will *not* automatically seed your database. You must manually seed your production database if/when you so choose (see step 8).
-
-8. *Attention!* Please run this command *only if you wish to seed your production database*: `heroku run -a HEROKU_APP_NAME flask seed all`
-
-## Helpful commands
-|    Command            |    Purpose    |
-| -------------         | ------------- |
-| `pipenv shell`        | Open your terminal in the virtual environment and be able to run flask commands without a prefix |
-| `pipenv run`          | Run a command from the context of the virtual environment without actually entering into it. You can use this as a prefix for flask commands  |
-| `flask db upgrade`    | Check in with the database and run any needed migrations  |
-| `flask db downgrade`  | Check in with the database and revert any needed migrations  |
-| `flask seed all`      | Just a helpful syntax to run queries against the db to seed data. See the **app/seeds** folder for reference and more details |
-| `heroku login -i`      | Authenticate your heroku-cli using the command line. Drop the -i to authenticate via the browser |
-| `heroku authorizations:create` | Once authenticated, use this to generate an Oauth token |
-| `heroku run -a <app name>` | Run a command from within the deployed container on Heroku |
