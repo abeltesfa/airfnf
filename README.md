@@ -68,7 +68,7 @@ Logged in users have the ability to view the bookings associated with their acco
 ## Challenges Faced
 Dealing with dates and conversions proved to be a difficult task. There were timezone issues as well as general date conversion issues that had I had to be aware of when dealing with error validation for the bookings. It required the use of a package called date-fns that made the job a lot easier however there was still logic that had to be implemented when comparing dates across the database.
 
-### Installation Instructions
+## Installation Instructions
 1. Install dependencies
 
       ```bash
