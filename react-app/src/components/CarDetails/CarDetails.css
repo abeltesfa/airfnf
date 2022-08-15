@@ -103,6 +103,10 @@
     border: solid 1px #D8D8D8;
 }
 
+.details-create-booking-container label{
+    padding-right: 10px;
+}
+
 .details-bookings-edit-btn{
     border: 0;
     background-color: #FF385C;
@@ -193,4 +197,15 @@
 .details-currentbookings-single{
     padding-bottom: 10px;
     border-bottom: #D8D8D8 3px solid;
+}
+
+.edit-booking-form{
+    padding: 10px;
+}
+.edit-booking-form label {
+    padding-right: 10px;
+}
+
+.edit-booking-form div {
+    padding-bottom: 10px;
 }

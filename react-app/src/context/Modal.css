@@ -71,7 +71,7 @@
   }
 
   ul.errors li {
-    color:grey;
+    color:red;
     margin: 8px;
   }
 

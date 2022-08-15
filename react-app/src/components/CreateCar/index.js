@@ -259,30 +259,30 @@ const CreateCar = () => {
                         </div>
                         <div>
                             <label htmlFor="description">Description:*</label>
-                            <textarea id="description" onChange={e => setDescription(e.target.value)} value={description}></textarea>
+                            <textarea id="description" className="car-textarea" onChange={e => setDescription(e.target.value)} value={description}></textarea>
                         </div>
                         <div>
                             <label htmlFor="price">Price:*</label>
                             <input id="price" type="number" step=".01" onChange={e => setPrice(e.target.value)} value={price} />
                         </div>
                         <div>
-                            <label htmlFor="image1">Image1:*</label>
+                            <label htmlFor="image1">Image1 URL:*</label>
                             <input id="image1" type="url" onChange={e => setImage1(e.target.value)} value={image1} />
                         </div>
                         <div>
-                            <label htmlFor="image2">Image2:*</label>
+                            <label htmlFor="image2">Image2 URL:*</label>
                             <input id="image2" type="url" onChange={e => setImage2(e.target.value)} value={image2} />
                         </div>
                         <div>
-                            <label htmlFor="image3">Image3:*</label>
+                            <label htmlFor="image3">Image3 URL:*</label>
                             <input id="image3" type="url" onChange={e => setImage3(e.target.value)} value={image3} />
                         </div>
                         <div>
-                            <label htmlFor="image4">Image4:*</label>
+                            <label htmlFor="image4">Image4 URL:*</label>
                             <input id="image4" type="url" onChange={e => setImage4(e.target.value)} value={image4} />
                         </div>
                         <div>
-                            <label htmlFor="image5">Image5:*</label>
+                            <label htmlFor="image5">Image5 URL:*</label>
                             <input id="image5" type="url" onChange={e => setImage5(e.target.value)} value={image5} />
                         </div>
                         <span>* This field is required</span>

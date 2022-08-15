@@ -26,6 +26,12 @@ const BookingEdit = ({ carId, booking, hideForm, sessionUser}) => {
 
     useEffect(() => {
         const errors = [];
+        if(!startDate){
+            errors.push('Start date must be entered')
+        }
+        if(!endDate){
+            errors.push('End date must be entered')
+        }
         if (addHours(new Date(startDate), timezoneOffset) < convertedToday) {
             errors.push('Start date cannot be in the past.')
         }
@@ -90,7 +96,7 @@ const BookingEdit = ({ carId, booking, hideForm, sessionUser}) => {
                 </div>
             )} */}
             <ErrorModal hideModal={() => setShowModal(false)} showModal={showModal} validationErrors={validationErrors} />
-            <form onSubmit={onSubmit}>
+            <form className='edit-booking-form' onSubmit={onSubmit}>
                 <div>
                     <label htmlFor="startDate">Start Date:</label>
                     <input id="startDate" type="date" onChange={e => setStartDate(e.target.value)} value={startDate} />

@@ -8,6 +8,7 @@ import { differenceInCalendarDays } from "date-fns";
 import './UserPage.css'
 
 
+
 const UserPage = ({ sessionUser }) => {
     const dispatch = useDispatch();
     const bookings = useSelector(state => state.bookings);
@@ -57,7 +58,7 @@ const UserPage = ({ sessionUser }) => {
                                     <div className="userprofile-booking-container" key={booking?.id}>
                                         <NavLink to={`/cars/${booking.carId}`}>
                                             <p>{cars[booking.carId]?.carYear} {cars[booking.carId]?.make} {cars[booking.carId]?.model}</p>
-                                            <img className="userprofile-img" src={cars[booking.carId]?.images[0]?.url} alt=""></img>
+                                            <img className="userprofile-img" src={cars[booking.carId]?.images[0]?.url} onError={(e) => { e.target.onError = null; e.target.src = 'https://instaspambucket.s3.amazonaws.com/410ad2d60dcb491fad634907562cd176.png' }} alt=""></img>
                                         </NavLink>
                                         <p>Start Date: {formatInTimeZone(new Date(booking?.startDate), 'UTC', 'EEEE MMMM do yyyy')} </p>
                                         <p>End Date: {formatInTimeZone(new Date(booking?.endDate), 'UTC', 'EEEE MMMM do yyyy')}</p>
