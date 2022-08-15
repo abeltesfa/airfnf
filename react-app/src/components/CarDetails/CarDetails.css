@@ -17,6 +17,11 @@
     margin-left: 33px;
 } */
 
+.details-cardetails-container{
+    margin-bottom: 15px;
+    border-bottom:  3px solid #f8f8f8;
+}
+
 .details-delete-car-btn{
     border: 0;
     background-color: transparent;

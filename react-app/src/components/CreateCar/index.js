@@ -34,31 +34,31 @@ const CreateCar = () => {
         if (!make) {
             errors.push('Please select a make.')
         }
-        if (model.length <= 0) {
+        if (model.length <= 0 || !model.trim().length) {
             errors.push('Please enter a model name.');
         }
         if (model.length > 40) {
             errors.push('Model name cannot be more than 40 characters.');
         }
-        if (city.length <= 0) {
+        if (city.length <= 0 || !city.trim().length) {
             errors.push('Please enter a city.');
         }
         if (city.length > 85) {
             errors.push('City name cannot be more than 85 characters.');
         }
-        if (state.length <= 0) {
+        if (state.length <= 0 || !state.trim().length) {
             errors.push('Please enter a state. Enter N/A if not applicable.');
         }
         if (state.length > 20) {
             errors.push('State name cannot be longer than 20 characters.');
         }
-        if (country.length <= 0) {
+        if (country.length <= 0 || !country.trim().length) {
             errors.push('Please enter a country.');
         }
         if (country.length > 57) {
             errors.push('Country name cannot be more than 57 characters.');
         }
-        if (description.length <= 0) {
+        if (description.length <= 0 || !description.trim().length) {
             errors.push('Please enter a description');
         }
         if (description.length > 1000) {
@@ -283,7 +283,7 @@ const CreateCar = () => {
                         </div>
                         <span>* This field is required</span>
                         <div>
-                            <button>Submit</button>
+                            <button className="single-btn-airbnb-color">Submit</button>
                         </div>
                     </form>
                 </div>

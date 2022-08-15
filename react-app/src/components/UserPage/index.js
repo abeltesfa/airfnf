@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import { getUserBookings } from "../../store/bookings";
 import { getAllCars } from "../../store/cars";
 import { formatInTimeZone } from 'date-fns-tz';
+import { differenceInCalendarDays } from "date-fns";
 import './UserPage.css'
 
 
@@ -11,13 +12,15 @@ const UserPage = ({ sessionUser }) => {
     const dispatch = useDispatch();
     const bookings = useSelector(state => state.bookings);
     const cars = useSelector(state => state.cars)
+    const priceArr = [];
+    Object.values(bookings).map(booking => priceArr.push([booking.carId, (differenceInCalendarDays(new Date(booking.endDate), new Date(booking.startDate)) + 1)]))
 
     useEffect(() => {
         dispatch(getUserBookings(sessionUser.id))
         dispatch(getAllCars())
     }, [dispatch, sessionUser])
 
-    console.log(sessionUser)
+    console.log(cars)
     return (
         bookings ?
             <div className="page-outer">
