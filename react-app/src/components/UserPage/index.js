@@ -20,14 +20,32 @@ const UserPage = ({ sessionUser }) => {
         dispatch(getAllCars())
     }, [dispatch, sessionUser])
 
-    console.log(cars)
+    // useEffect(()=> {
+
+    // },[])
+
+    if (priceArr) {
+        for (let i = 0; i < priceArr.length; i++) {
+            priceArr[i].push(cars[priceArr[i][0]]?.price)
+        }
+    }
+
+    let totalPrice = 0;
+
+    if (priceArr) {
+        for (let i = 0; i < priceArr.length; i++) {
+            totalPrice += priceArr[i][1] * priceArr[i][2];
+        }
+    }
+
+    console.log(totalPrice)
     return (
         bookings ?
             <div className="page-outer">
                 <div className="page-margin-add"></div>
                 <div className="page-info">
-                    <div>
-                        <h1>{sessionUser?.name}'s Profile Page</h1>
+                    <h1>{sessionUser?.name}'s Profile Page</h1>
+                    <div className="userprofile-container">
                         <div>
                             <h3>My Bookings</h3>
                             <div>
@@ -45,6 +63,22 @@ const UserPage = ({ sessionUser }) => {
                                         <p>End Date: {formatInTimeZone(new Date(booking?.endDate), 'UTC', 'EEEE MMMM do yyyy')}</p>
                                     </div>
                                 ))}
+                            </div>
+                        </div>
+                        <div className="userprofile-bookingpricesummary-container">
+                            <h3>Booking Price Summary</h3>
+                            <div>
+                                <div>
+                                    {priceArr.map(price => (
+                                        <div className="userprofile-singlebookingprice">
+                                            <p>Car: {cars[price[0]]?.carYear} {cars[price[0]]?.model} </p>
+                                            <p>Number of Days: {price[1]} * Price: {price[2]}</p>
+                                        </div>
+                                    ))}
+                                </div>
+                                <div>
+                                    <h4>Total Price: ${totalPrice.toFixed(2)}</h4>
+                                </div>
                             </div>
                         </div>
                     </div>

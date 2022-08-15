@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, NavLink, Route, Switch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 // import LoginForm from './components/auth/LoginForm';
 // import SignUpForm from './components/auth/SignUpForm';
@@ -52,7 +52,9 @@ function App() {
           <HomePage sessionUser={sessionUser} />
         </Route>
         <Route>
-          Page loading... or page not found
+          <div className='error404'>
+            <h1>Page not found. Click <NavLink to={'/'}>Here</NavLink> to go home</h1>
+          </div>
         </Route>
       </Switch>
     </BrowserRouter>

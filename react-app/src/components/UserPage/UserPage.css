@@ -17,9 +17,14 @@
 .userprofile-booking-container *{
     display: flex;
     flex-direction: column;
-    margin-left: 20px;
+    /* margin-left: 20px; */
 }
 
 .userprofile-container{
     display: flex;
+    justify-content: space-evenly;
+}
+
+.userprofile-singlebookingprice{
+    border-bottom: solid 3px #D8D8D8;
 }
