@@ -8,3 +8,9 @@ class Review(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     userId = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     carId = db.Column(db.Integer, db.ForeignKey('cars.id'), nullable=False)
+    rating = db.Column(db.Integer, nullable=False)
+    body = db.Column(db.String(255), nullable=False)
+    createdAt = db.Column(DateTime(timezone=True), server_default=func.now())
+
+    review_owner = db.relationship("User", back_populates="owner_reviews")
+    review_car = db.relationship("Car", back_populates="car_reviews")

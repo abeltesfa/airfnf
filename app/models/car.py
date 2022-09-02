@@ -21,6 +21,7 @@ class Car(db.Model):
     owner = db.relationship("User", back_populates="owner_cars")
     car_booking = db.relationship("Booking", back_populates="car_id",cascade="all, delete")
     car_images = db.relationship("Image", back_populates="image_id",cascade="all, delete")
+    car_reviews = db.relationship("Review", back_populates="review_car")
 
     def to_dict(self):
         return {
