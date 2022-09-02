@@ -4,12 +4,14 @@ import session from './session'
 import carsReducer from './cars'
 import imagesReducer from './images';
 import bookingsReducer from './bookings';
+import reviewsReducer from './review';
 
 const rootReducer = combineReducers({
   session,
   cars: carsReducer,
   images: imagesReducer,
-  bookings: bookingsReducer
+  bookings: bookingsReducer,
+  reviews: reviewsReducer
 });
 
 

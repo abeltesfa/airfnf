@@ -7,6 +7,7 @@ import BookingDetails from "../BookingDetails";
 import ErrorModal from "../ErrorModal";
 import { addHours, format } from 'date-fns';
 import './CarDetails.css'
+import { getCarReviews } from "../../store/review";
 // import { formatInTimeZone } from 'date-fns-tz';
 
 const CarDetails = ({ sessionUser }) => {
@@ -53,6 +54,7 @@ const CarDetails = ({ sessionUser }) => {
     useEffect(() => {
         dispatch(getAllCars())
         dispatch(getCarBookings(pCarId.carId))
+        dispatch(getCarReviews(pCarId.carId))
     }, [dispatch, pCarId])
 
     useEffect(() => {
