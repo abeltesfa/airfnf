@@ -14,6 +14,7 @@ class User(db.Model, UserMixin):
 
     owner_cars = db.relationship("Car", back_populates="owner")
     owner_bookings = db.relationship("Booking", back_populates="booking_id")
+    owner_reviews = db.relationship("Review", back_populates="review_owner")
 
 
     @property
