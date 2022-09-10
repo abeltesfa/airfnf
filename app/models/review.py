@@ -1,6 +1,7 @@
 from .db import db
 from sqlalchemy.sql import func
 from sqlalchemy import DateTime, true
+from .user import User
 
 class Review(db.Model):
     __tablename__ = 'reviews'
@@ -21,5 +22,6 @@ class Review(db.Model):
             'userId': self.userId,
             'carId': self.carId,
             'rating': self.rating,
-            'body': self.body
+            'body': self.body,
+            'username': User.query.get(self.userId).username
         }
