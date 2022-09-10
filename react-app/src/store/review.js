@@ -1,9 +1,15 @@
 const LOAD_REVIEWS = 'reviews/LOAD_REVIEWS';
+const ADD_REVIEWS = 'reviews/ADD_REVIEWS';
 
 const actionLoadReviews = (reviews) => ({
     type: LOAD_REVIEWS,
     reviews
 });
+
+const actionAddReviews = (review) => ({
+    type: ADD_REVIEWS,
+    review
+})
 
 export const getCarReviews = (carId) => async(dispatch) => {
     const response = await fetch(`/api/reviews/${carId}`);
@@ -11,6 +17,24 @@ export const getCarReviews = (carId) => async(dispatch) => {
         const reviews = await response.json();
         dispatch(actionLoadReviews(reviews));
         return reviews;
+    }
+}
+
+export const addReview = (rating, body) => async(dispatch) => {
+    const response = await fetch('/api/reviews/new', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            rating,
+            body
+        })
+    })
+    if(response.ok){
+        const review = await response.json();
+        dispatch(actionAddReviews(review));
+        return review;
     }
 }
 
@@ -23,6 +47,11 @@ const reviewsReducer =(state = {}, action) => {
                 newState[review.id] = review;
             });
             return newState;
+
+        case ADD_REVIEWS:
+            const newState2 = {...state};
+            newState2[action.review.id] = action.review;
+            return newState2;
 
         default:
             return state;
