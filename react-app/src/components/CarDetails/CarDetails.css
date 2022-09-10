@@ -171,6 +171,8 @@
 .details-createandcurrent-container{
     display: flex;
     justify-content: space-between;
+    border-bottom: 3px solid #f8f8f8;
+    padding-bottom: 15px;
 }
 
 .details-editanddelete-btns{

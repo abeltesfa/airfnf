@@ -16,6 +16,7 @@ const CarDetails = ({ sessionUser }) => {
     const pCarId = useParams();
     const cars = useSelector(state => state.cars);
     const bookings = useSelector(state => state.bookings);
+    const reviews = useSelector(state => state.reviews);
     const specificCar = cars[pCarId.carId];
     // const userId = sessionUser.id;
     const carId = pCarId.carId;
@@ -59,10 +60,10 @@ const CarDetails = ({ sessionUser }) => {
 
     useEffect(() => {
         const errors = [];
-        if(!startDate){
+        if (!startDate) {
             errors.push('Start date must be entered')
         }
-        if(!endDate){
+        if (!endDate) {
             errors.push('End date must be entered')
         }
         if (addHours(new Date(startDate), timezoneOffset) < convertedToday) {
@@ -139,19 +140,19 @@ const CarDetails = ({ sessionUser }) => {
                             </div>
                         ))} */}
                             <div className="details-img-big">
-                                <img src={specificCar.images[0]?.url} className='details-img-big-img' onError={(e) => { e.target.onError = null; e.target.src = 'https://instaspambucket.s3.amazonaws.com/410ad2d60dcb491fad634907562cd176.png'}} alt='' />
+                                <img src={specificCar.images[0]?.url} className='details-img-big-img' onError={(e) => { e.target.onError = null; e.target.src = 'https://instaspambucket.s3.amazonaws.com/410ad2d60dcb491fad634907562cd176.png' }} alt='' />
                             </div>
                             <div className="details-img-midtop">
-                                <img src={specificCar.images[1]?.url} className="details-img-midtop-img" onError={(e) => { e.target.onError = null; e.target.src = 'https://instaspambucket.s3.amazonaws.com/410ad2d60dcb491fad634907562cd176.png'}} alt='' />
+                                <img src={specificCar.images[1]?.url} className="details-img-midtop-img" onError={(e) => { e.target.onError = null; e.target.src = 'https://instaspambucket.s3.amazonaws.com/410ad2d60dcb491fad634907562cd176.png' }} alt='' />
                             </div>
                             <div className="details-img-midbottom">
-                                <img src={specificCar.images[2]?.url} className="details-img-midbottom-img" onError={(e) => { e.target.onError = null; e.target.src = 'https://instaspambucket.s3.amazonaws.com/410ad2d60dcb491fad634907562cd176.png'}} alt='' />
+                                <img src={specificCar.images[2]?.url} className="details-img-midbottom-img" onError={(e) => { e.target.onError = null; e.target.src = 'https://instaspambucket.s3.amazonaws.com/410ad2d60dcb491fad634907562cd176.png' }} alt='' />
                             </div>
                             <div className="details-img-endtop">
-                                <img src={specificCar.images[3]?.url} className="details-img-endtop-img" onError={(e) => { e.target.onError = null; e.target.src = 'https://instaspambucket.s3.amazonaws.com/410ad2d60dcb491fad634907562cd176.png'}} alt='' />
+                                <img src={specificCar.images[3]?.url} className="details-img-endtop-img" onError={(e) => { e.target.onError = null; e.target.src = 'https://instaspambucket.s3.amazonaws.com/410ad2d60dcb491fad634907562cd176.png' }} alt='' />
                             </div>
                             <div className="details-img-endbottom">
-                                <img src={specificCar.images[4]?.url} className="details-img-endbottom" onError={(e) => { e.target.onError = null; e.target.src = 'https://instaspambucket.s3.amazonaws.com/410ad2d60dcb491fad634907562cd176.png'}} alt='' />
+                                <img src={specificCar.images[4]?.url} className="details-img-endbottom" onError={(e) => { e.target.onError = null; e.target.src = 'https://instaspambucket.s3.amazonaws.com/410ad2d60dcb491fad634907562cd176.png' }} alt='' />
                             </div>
                         </div>
                         <div className="details-cardetails-container">
@@ -163,7 +164,7 @@ const CarDetails = ({ sessionUser }) => {
                         {specificCar?.userId === sessionUser?.id && (
                             <div className="details-editanddelete-btns">
                                 <div>
-                                    <NavLink to={{pathname:`/cars/${specificCar.id}/edit`, state:{specificCar: specificCar}}} className="details-edit-car-btn">
+                                    <NavLink to={{ pathname: `/cars/${specificCar.id}/edit`, state: { specificCar: specificCar } }} className="details-edit-car-btn">
                                         Car Edit
                                     </NavLink>
                                 </div>
@@ -218,6 +219,16 @@ const CarDetails = ({ sessionUser }) => {
                                         </div>
                                     ))}
                                 </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3>Reviews</h3>
+                            <div>
+                                {Object.values(reviews).map((review) => (
+                                    <div className="details-currentreviews-single" key={review?.id}>
+                                        {review?.body}
+                                    </div>
+                                ))}
                             </div>
                         </div>
                     </div>
