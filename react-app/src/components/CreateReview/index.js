@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { addReview } from "../../store/review";
 import ErrorModal from "../ErrorModal";
 
-const createReview = () => {
+const CreateReview = ({carId}) => {
     const [rating, setRating] = useState('');
     const [body, setBody] = useState('');
     const [showModal, setShowModal] = useState(false);
@@ -32,6 +33,7 @@ const createReview = () => {
         if (validationErrors.length) {
             setShowModal(true);
         } else {
+            await dispatch(addReview(carId, rating, body))
 
         }
         return () => {
@@ -67,4 +69,4 @@ const createReview = () => {
     )
 }
 
-export default createReview;
+export default CreateReview;

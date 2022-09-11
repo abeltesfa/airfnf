@@ -20,13 +20,14 @@ export const getCarReviews = (carId) => async(dispatch) => {
     }
 }
 
-export const addReview = (rating, body) => async(dispatch) => {
+export const addReview = (carId, rating, body) => async(dispatch) => {
     const response = await fetch('/api/reviews/new', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
+            carId,
             rating,
             body
         })

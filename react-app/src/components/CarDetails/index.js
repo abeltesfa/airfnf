@@ -8,6 +8,7 @@ import ErrorModal from "../ErrorModal";
 import { addHours, format } from 'date-fns';
 import './CarDetails.css'
 import { getCarReviews } from "../../store/review";
+import CreateReview from "../CreateReview";
 // import { formatInTimeZone } from 'date-fns-tz';
 
 const CarDetails = ({ sessionUser }) => {
@@ -223,6 +224,9 @@ const CarDetails = ({ sessionUser }) => {
                         </div>
                         <div>
                             <h3>Reviews</h3>
+                            <div>
+                                <CreateReview carId={carId} />
+                            </div>
                             <div>
                                 {Object.values(reviews).map((review) => (
                                     <div className="details-currentreviews-single" key={review?.id}>
