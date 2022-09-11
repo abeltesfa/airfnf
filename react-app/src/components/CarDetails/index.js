@@ -9,6 +9,7 @@ import { addHours, format } from 'date-fns';
 import './CarDetails.css'
 import { getCarReviews } from "../../store/review";
 import CreateReview from "../CreateReview";
+import ReviewDetails from "../ReviewDetails";
 // import { formatInTimeZone } from 'date-fns-tz';
 
 const CarDetails = ({ sessionUser }) => {
@@ -224,13 +225,16 @@ const CarDetails = ({ sessionUser }) => {
                         </div>
                         <div>
                             <h3>Reviews</h3>
-                            <div>
-                                <CreateReview carId={carId} />
-                            </div>
+                            {sessionUser ?
+                                <div>
+                                    <CreateReview carId={carId} />
+                                </div>
+                                : null
+                            }
                             <div>
                                 {Object.values(reviews).map((review) => (
                                     <div className="details-currentreviews-single" key={review?.id}>
-                                        {review?.body}
+                                        <ReviewDetails review={review} carId={carId} sessionUser={sessionUser} />
                                     </div>
                                 ))}
                             </div>

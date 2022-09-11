@@ -39,6 +39,25 @@ export const addReview = (carId, rating, body) => async(dispatch) => {
     }
 }
 
+export const editReview = (reviewId, rating, body) => async(dispatch) => {
+    const response = await fetch(`/api/reviews/${reviewId}/edit`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+
+            rating,
+            body
+        })
+    })
+    if(response.ok) {
+        const review = await response.json();
+        dispatch(actionAddReviews(review));
+        return review;
+    }
+}
+
 const reviewsReducer =(state = {}, action) => {
     switch(action.type) {
         case LOAD_REVIEWS:
