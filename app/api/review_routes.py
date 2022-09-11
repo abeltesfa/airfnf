@@ -41,3 +41,10 @@ def edit_review(reviewId):
         db.session.commit()
         return edited_review.to_dict()
     return {'errors':validation_errors_to_error_messages(form.errors)}, 401
+
+@review_routes.route('/<int:reviewId>/delete', methods=['DELETE'])
+def delete_review(reviewId):
+    deleted_review = Review.query.get(reviewId)
+    db.session.delete(deleted_review)
+    db.session.commit()
+    return f'{reviewId}'

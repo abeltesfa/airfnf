@@ -1,5 +1,6 @@
 const LOAD_REVIEWS = 'reviews/LOAD_REVIEWS';
 const ADD_REVIEWS = 'reviews/ADD_REVIEWS';
+const DELETE_REVIEWS = 'reviews/DELETE_REVIEWS';
 
 const actionLoadReviews = (reviews) => ({
     type: LOAD_REVIEWS,
@@ -9,6 +10,11 @@ const actionLoadReviews = (reviews) => ({
 const actionAddReviews = (review) => ({
     type: ADD_REVIEWS,
     review
+});
+
+const actionDeleteReview = (reviewId) => ({
+    type: DELETE_REVIEWS,
+    reviewId
 })
 
 export const getCarReviews = (carId) => async(dispatch) => {
@@ -58,6 +64,15 @@ export const editReview = (reviewId, rating, body) => async(dispatch) => {
     }
 }
 
+export const deleteReview = (reviewId) => async(dispatch) => {
+    const response = await fetch(`/api/reviews/${reviewId}/delete`, {
+        method: 'DELETE'
+    })
+    if(response.ok){
+        dispatch(actionDeleteReview(reviewId))
+    }
+}
+
 const reviewsReducer =(state = {}, action) => {
     switch(action.type) {
         case LOAD_REVIEWS:
@@ -72,6 +87,11 @@ const reviewsReducer =(state = {}, action) => {
             const newState2 = {...state};
             newState2[action.review.id] = action.review;
             return newState2;
+
+        case DELETE_REVIEWS:
+            const newState3 = {...state};
+            delete newState3[action.reviewId]
+            return newState3;
 
         default:
             return state;
