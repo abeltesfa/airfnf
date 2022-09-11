@@ -39,7 +39,7 @@ export const addReview = (carId, rating, body) => async(dispatch) => {
     }
 }
 
-export const editReview = (reviewId, carId, rating, body) => async(dispatch) => {
+export const editReview = (reviewId, rating, body) => async(dispatch) => {
     const response = await fetch(`/api/reviews/${reviewId}/edit`, {
         method: 'PUT',
         headers: {
@@ -47,7 +47,6 @@ export const editReview = (reviewId, carId, rating, body) => async(dispatch) => 
         },
         body: JSON.stringify({
 
-            carId,
             rating,
             body
         })

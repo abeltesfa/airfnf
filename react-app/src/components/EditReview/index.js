@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { editReview } from '../../store/review';
 import ErrorModal from '../ErrorModal';
 
 function EditReview({ review, sessionUser, carId, hideForm }) {
@@ -9,6 +10,7 @@ function EditReview({ review, sessionUser, carId, hideForm }) {
     const [validationErrors, setValidationErrors] = useState([]);
 
     const dispatch = useDispatch();
+    const reviewId = review?.id
 
     useEffect(() => {
         const errors = [];
@@ -32,7 +34,11 @@ function EditReview({ review, sessionUser, carId, hideForm }) {
         if (validationErrors.length) {
             setShowModal(true);
         } else {
+            const editedReview = await dispatch(editReview(reviewId, rating, body))
 
+            if (editedReview){
+                hideForm();
+            }
         }
         return () => {
 
