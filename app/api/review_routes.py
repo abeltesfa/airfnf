@@ -28,3 +28,16 @@ def add_reviews():
         db.session.commit()
         return review.to_dict()
     return {'errors':validation_errors_to_error_messages(form.errors)}, 401
+
+@review_routes.route('/<int:reviewId>/edit', methods=['PUT'])
+def edit_review(reviewId):
+    form = ReviewForm()
+    edited_review = Review.query.get(reviewId)
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        edited_review.rating = form.data['rating']
+        edited_review.body = form.data['body']
+
+        db.session.commit()
+        return edited_review.to_dict()
+    return {'errors':validation_errors_to_error_messages(form.errors)}, 401
