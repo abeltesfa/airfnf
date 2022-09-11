@@ -33,8 +33,11 @@ const CreateReview = ({carId}) => {
         if (validationErrors.length) {
             setShowModal(true);
         } else {
-            await dispatch(addReview(carId, rating, body))
-
+            const createdReview = await dispatch(addReview(carId, rating, body))
+            if(createdReview){
+                setRating('');
+                setBody('');
+            }
         }
         return () => {
 
@@ -43,6 +46,7 @@ const CreateReview = ({carId}) => {
 
     return (
         <div>
+            <h4>Leave a review...</h4>
             <ErrorModal hideModal={() => setShowModal(false)} showModal={showModal} validationErrors={validationErrors} />
             <form onSubmit={onSubmit}>
                 <div>
@@ -58,7 +62,7 @@ const CreateReview = ({carId}) => {
                 </div>
                 <div>
                     <label htmlFor="body">Review:*</label>
-                    <textarea id="body" className="car-textarea" onChange={e => setBody(e.target.value)} value={body}></textarea>
+                    <textarea id="body" onChange={e => setBody(e.target.value)} value={body}></textarea>
                 </div>
                 <span>* This field is required</span>
                 <div>
