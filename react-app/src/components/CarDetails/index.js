@@ -232,6 +232,10 @@ const CarDetails = ({ sessionUser }) => {
                                 : null
                             }
                             <div>
+                                {Object.keys(reviews).length ?
+                                    null
+                                    : <h4>No Current Reviews listed...</h4>
+                                }
                                 {Object.values(reviews).map((review) => (
                                     <div className="details-currentreviews-single" key={review?.id}>
                                         <ReviewDetails review={review} carId={carId} sessionUser={sessionUser} />
