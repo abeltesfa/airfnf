@@ -45,7 +45,7 @@ const CreateReview = ({carId}) => {
     }
 
     return (
-        <div>
+        <div className="create-review-container">
             <h4>Leave a review...</h4>
             <ErrorModal hideModal={() => setShowModal(false)} showModal={showModal} validationErrors={validationErrors} />
             <form onSubmit={onSubmit}>
@@ -62,11 +62,14 @@ const CreateReview = ({carId}) => {
                 </div>
                 <div>
                     <label htmlFor="body">Review:*</label>
-                    <textarea id="body" onChange={e => setBody(e.target.value)} value={body}></textarea>
+                    <textarea id="body" rows="7" cols="70" className="car-textarea" onChange={e => setBody(e.target.value)} value={body}></textarea>
                 </div>
+                <br></br>
                 <span>* This field is required</span>
+
                 <div>
-                    <button className="single-btn-airbnb-color">Submit</button>
+                <br></br>
+                    <button className="single-btn-airbnb-color">Submit Review</button>
                 </div>
             </form>
         </div>
