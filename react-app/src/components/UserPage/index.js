@@ -39,7 +39,6 @@ const UserPage = ({ sessionUser }) => {
         }
     }
 
-    console.log(totalPrice)
     return (
         bookings ?
             <div className="page-outer">

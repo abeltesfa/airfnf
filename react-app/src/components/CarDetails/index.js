@@ -35,6 +35,17 @@ const CarDetails = ({ sessionUser }) => {
     Object.values(bookings).map(booking => currBookingsArr.push([addHours(new Date(booking.startDate), timezoneOffset), addHours(new Date(booking.endDate), timezoneOffset)]))
     const formatToday = format(new Date(), 'yyyy-MM-dd');
     const convertedToday = addHours(new Date(formatToday), timezoneOffset);
+    const ratingsArr = [];
+    Object.values(reviews).map(review => ratingsArr.push(review?.rating))
+    let totalRating = 0;
+    let ratingVal;
+
+    if (ratingsArr) {
+        for (let i = 0; i < ratingsArr.length; i++) {
+            totalRating += ratingsArr[i]
+        }
+        ratingVal = totalRating / ratingsArr.length
+    }
 
 
     // const dateRangeArr = [];
@@ -225,13 +236,21 @@ const CarDetails = ({ sessionUser }) => {
                         </div>
                         <div>
                             <h3>Reviews</h3>
+                            {Object.keys(reviews).length ?
+                                <h4>Current Rating: {ratingVal.toFixed(2)}</h4>
+                                : null
+                            }
                             {sessionUser ?
                                 <div>
                                     <CreateReview carId={carId} />
                                 </div>
                                 : null
                             }
-                            <div>
+                            <div className="reviews-container">
+                                {Object.keys(reviews).length ?
+                                    null
+                                    : <h4>No Current Reviews listed...</h4>
+                                }
                                 {Object.values(reviews).map((review) => (
                                     <div className="details-currentreviews-single" key={review?.id}>
                                         <ReviewDetails review={review} carId={carId} sessionUser={sessionUser} />

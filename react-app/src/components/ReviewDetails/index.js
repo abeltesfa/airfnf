@@ -19,7 +19,7 @@ function ReviewDetails({review, carId, sessionUser}) {
                 <p>Rating: {review?.rating}</p>
                 <p>Review: </p>
                 <p>{review?.body}</p>
-                <p>Review Author: {review?.username}</p>
+                <h5>Review Author: {review?.username}</h5>
                 {sessionUser?.id === review?.userId && (
                     <div>
                         <button className="details-bookings-edit-btn" onClick={() => setShowEditReview(true)}>Edit Review</button>
