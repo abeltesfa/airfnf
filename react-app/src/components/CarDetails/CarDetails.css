@@ -211,3 +211,21 @@
 .edit-booking-form div {
     padding-bottom: 10px;
 }
+
+.details-singlereview{
+    border: 3px #D8D8D8 solid;
+    border-radius: 11px;
+    width: 100%;
+    padding-left: 10px;
+    min-width: 500px;
+    min-height: 200px;
+    margin-top: 10px;
+    padding-bottom: 10px;
+}
+
+.reviews-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    /* width:100%; */
+}

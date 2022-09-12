@@ -231,7 +231,7 @@ const CarDetails = ({ sessionUser }) => {
                                 </div>
                                 : null
                             }
-                            <div>
+                            <div className="reviews-container">
                                 {Object.keys(reviews).length ?
                                     null
                                     : <h4>No Current Reviews listed...</h4>
