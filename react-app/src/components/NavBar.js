@@ -5,6 +5,7 @@ import airfnflogo from '../images/airbnb-logo.png'
 import "./NavBar.css"
 import { login } from '../store/session';
 import { useDispatch } from 'react-redux';
+import SearchBar from './SearchBar';
 
 const NavBar = ({ sessionUser }) => {
   const email = 'demo@email.com';
@@ -21,7 +22,7 @@ const NavBar = ({ sessionUser }) => {
           <img className='navbar-logo' src={airfnflogo} alt=''></img>
         </NavLink>
       </div>
-      <div className='navbar-center'></div>
+      <div className='navbar-center'><SearchBar></SearchBar></div>
       <nav className='navbar-right'>
         <NavLink to='/about' exact={true} activeClassName='active'>
           About
