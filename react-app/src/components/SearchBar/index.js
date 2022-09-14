@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 import "./SearchBar.css"
 
 const SearchBar = () => {
-    const carsState = useSelector(state => state.cars);
     const [cars, setCars] = useState('');
     const [carData, setCarData] = useState('');
     const [dropdown, setDropdown] = useState(false);
@@ -18,13 +17,14 @@ const SearchBar = () => {
 
     useEffect(() => {
         fetchCars()
-    }, [carsState]);
+    }, []);
 
     console.log('cardata........', carData)
 
     const handleChange = (searchWord) => {
+        console.log(cars.cars)
         if (searchWord) {
-            const searchCarResults = cars.cars.filter(car => car.make.startsWith(searchWord.toLowerCase()))
+            const searchCarResults = cars.cars.filter(car => car.make.toLowerCase().startsWith(searchWord.toLowerCase()))
             console.log(searchCarResults)
 
             setCarData(searchCarResults);
