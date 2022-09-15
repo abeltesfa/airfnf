@@ -20,8 +20,9 @@
 
 .search-field input {
 
-    width: 230px;
+    width: 275px;
     height: 25px;
+    margin-top: 40px;
 }
 
 .search-results {
@@ -45,8 +46,21 @@
 
 .search-results>div>a {
     text-decoration: none;
+    color: #FF385C;
 }
 
 .search-none {
     display: hidden;
 }
+
+.no-hide {
+    display: none;
+  }
+
+  .no-show{
+    font-weight:600;
+    color:#8e8e8e;
+    position:absolute;
+    top:150px;
+    left:75px;
+  }

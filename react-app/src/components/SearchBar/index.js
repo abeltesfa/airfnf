@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 import "./SearchBar.css"
 
 const SearchBar = () => {
-    const carsState = useSelector(state => state.cars);
     const [cars, setCars] = useState('');
     const [carData, setCarData] = useState('');
     const [dropdown, setDropdown] = useState(false);
@@ -18,13 +17,14 @@ const SearchBar = () => {
 
     useEffect(() => {
         fetchCars()
-    }, [carsState]);
+    }, []);
 
     console.log('cardata........', carData)
 
     const handleChange = (searchWord) => {
+        console.log(cars.cars)
         if (searchWord) {
-            const searchCarResults = cars.cars.filter(car => car.make.startsWith(searchWord.toLowerCase()))
+            const searchCarResults = cars.cars.filter(car => car.make.toLowerCase().startsWith(searchWord.toLowerCase()) || car.model.toLowerCase().startsWith(searchWord.toLowerCase()) || car.carYear.toString().startsWith(searchWord))
             console.log(searchCarResults)
 
             setCarData(searchCarResults);
@@ -49,7 +49,7 @@ const SearchBar = () => {
             }
             <div className="search-field">
                 <input
-                    placeholder="Search"
+                    placeholder="Search Make, Model, or Year"
                     onChange={(e) => handleChange(e.target.value)}
                     value={searchInput}
                 >
@@ -65,7 +65,7 @@ const SearchBar = () => {
                                         <Link onClick={() => clickResult()} to={`/cars/${car.id}`} >
                                             <div className="search-car-info">
                                                 <div className="search-carmake">
-                                                    {car.make}
+                                                    {car.carYear} {car.make} {car.model}
                                                 </div>
                                             </div>
                                         </Link>
