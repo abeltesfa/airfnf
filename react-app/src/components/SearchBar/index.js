@@ -19,13 +19,10 @@ const SearchBar = () => {
         fetchCars()
     }, []);
 
-    console.log('cardata........', carData)
 
     const handleChange = (searchWord) => {
-        console.log(cars.cars)
         if (searchWord) {
             const searchCarResults = cars.cars.filter(car => car.make.toLowerCase().startsWith(searchWord.toLowerCase()) || car.model.toLowerCase().startsWith(searchWord.toLowerCase()) || car.carYear.toString().startsWith(searchWord))
-            console.log(searchCarResults)
 
             setCarData(searchCarResults);
             setDropdown(true);
