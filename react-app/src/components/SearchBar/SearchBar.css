@@ -20,8 +20,9 @@
 
 .search-field input {
 
-    width: 230px;
+    width: 275px;
     height: 25px;
+    margin-top: 40px;
 }
 
 .search-results {
@@ -45,6 +46,7 @@
 
 .search-results>div>a {
     text-decoration: none;
+    color: #FF385C;
 }
 
 .search-none {
